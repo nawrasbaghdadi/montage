@@ -1,0 +1,114 @@
+/*
+ * jQuery FlexSlider v2.0
+ * http://www.woothemes.com/flexslider/
+ *
+ * Copyright 2012 WooThemes
+ * Free to use under the GPLv2 license.
+ * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Contributing author: Tyler Smith (@mbmufffin)
+ */
+
+ 
+/* Browser Resets */
+.flex-container a:active,
+.home-slider-container a:active,
+.flex-container a:focus,
+.home-slider-container a:focus  {outline: none;}
+.home-slider-container .slides,
+.flex-control-nav,
+.flex-direction-nav {margin: 0; padding: 0; list-style: none;} 
+
+/* FlexSlider Necessary Styles
+*********************************/ 
+.home-slider-outer-container {margin: 35px 0px 20px 0px; padding: 0;width: 100%;position:relative;}
+.home-slider-container {margin: 0px; padding: 0;width: 100%;background:url(images/slider-preloader.gif) center center no-repeat #f1f1f1;}
+.home-slider-container .slides > li {display: none;width: 100%;height: 475px;position:relative;background:center no-repeat #f1f1f1;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.home-slider-container .slides > li a.image-link{display:block;width: 100%;height: 475px;}
+.flex-pauseplay span {text-transform: capitalize;}
+
+/* Clearfix for the .slides element */
+.home-slider-container .slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
+html[xmlns] .home-slider-container .slides {display: block;} 
+* html .home-slider-container .slides {height: 1%;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .slides > li:first-child {display: block;}
+
+
+/* FlexSlider Default Theme
+*********************************/
+.home-slider-container {position: relative;
+						-webkit-border-radius: 0px;
+						-moz-border-radius: 0px;
+						-o-border-radius: 0px;
+						border-radius: 0px; 
+						box-shadow: 0 10px 20px rgba(111,111,111,.2); 
+						-webkit-box-shadow: 0 10px 20px rgba(111,111,111,.2); 
+						-moz-box-shadow: 0 10px 20px rgba(111,111,111,.2); 
+						-o-box-shadow: 0 10px 20px rgba(111,111,111,.2); 
+						zoom: 1;height:475px;}
+.home-slider-container .slider-nav-showreel{position:absolute;top: -19px;right:50%;margin-right:-500px;width:65px;text-transform:uppercase;font-size:12px;color:#333333;display:none;}
+.home-slider-container .slides li a.trigger{display:inline-block;height:80px;position:absolute;right:50%;bottom:50px;margin-right:-500px;text-decoration:none;text-transform:uppercase;font-weight:bold;
+						box-shadow: 2px 2px 5px rgba(111,111,111,.7); 
+						-webkit-box-shadow: 2px 2px 5px rgba(111,111,111,.7); 
+						-moz-box-shadow: 2px 2px 5px rgba(111,111,111,.7); 
+						-o-box-shadow: 2px 2px 5px rgba(111,111,111,.7); }
+.home-slider-container .slides li:hover a.trigger,
+.home-slider-container .slides li:focus a.trigger{
+						box-shadow: 2px 2px 5px rgba(0,0,0,.7); 
+						-webkit-box-shadow: 2px 2px 5px rgba(0,0,0,.7); 
+						-moz-box-shadow: 2px 2px 5px rgba(0,0,0,.7); 
+						-o-box-shadow: 2px 2px 5px rgba(0,0,0,.7); }
+.home-slider-container .slides li a.trigger span.title{background-color:rgba(69,77,81,.9);display:block;height:50px;padding:0px 15px;line-height:50px;font-size:28px;color:#ffffff;min-width:250px;font-weight:normal;}
+.home-slider-container .slides li a.trigger span.desc{background-color:rgba(255,255,255,.9);display:block;height:30px;padding:0px 10px;line-height:30px;font-size:18px;color:#373f41;text-align:right;min-width:250px;}
+.home-slider-container .slides li:hover a.trigger span.title{background-color:rgba(80,80,80,.9);}
+.home-slider-container .slides li:hover a.trigger span.desc{background-color:rgba(255,255,255,.95)}
+
+.home-slider-container .flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
+.home-slider-container .loading .flex-viewport {max-height: 350px;}
+.home-slider-container .slides {zoom: 1 !important;}
+
+.carousel li {margin-right: 5px}
+
+
+/* Direction Nav */
+.home-slider-outer-container .flex-direction-nav {display:none !important;}
+.home-slider-container .flex-direction-nav {*height: 0;}
+.home-slider-container .flex-direction-nav a {width: 25px; height: 31px; margin: -20px 0 0; display: none; background: url(images/big-slider-controls.png) no-repeat 0 0; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
+.home-slider-container .flex-direction-nav .flex-next {background-position: top right; right: -36px; }
+.home-slider-container .flex-direction-nav .flex-prev {left: -36px;}
+.home-slider-container:hover .flex-next {opacity: 0.8; right: 5px;}
+.home-slider-container:hover .flex-prev {opacity: 0.8; left: 5px;}
+.home-slider-container:hover .flex-next:hover, .home-slider-container:hover .flex-prev:hover {opacity: 1;}
+.home-slider-container .flex-direction-nav .flex-disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
+
+/* Control Nav */
+.home-slider-outer-container .flex-control-nav,
+.home-news-list-container .flex-control-nav{position: absolute; top: -22px; text-align: center;right:50%;margin-right:-500px;}
+.home-news-list-container .flex-control-nav{top: 9px;}
+.home-slider-outer-container .flex-control-nav li ,
+.home-news-list-container .flex-control-nav li {margin: 0 0px 0px 6px; display: inline-block; zoom: 1; *display: inline;}
+.home-slider-outer-container .flex-control-paging li a,
+.home-news-list-container .flex-control-paging li a {width: 8px;background-color:#bcbcbc; height: 8px;text-indent:999px;overflow:hidden; display: block; cursor: pointer;font-size:12px;color:#333;text-decoration:none;
+						-webkit-border-radius: 8px;
+						-moz-border-radius: 8px;
+						-o-border-radius: 8px;
+						border-radius: 8px; }
+.home-slider-outer-container .flex-control-paging li a:hover, 
+.home-news-list-container .flex-control-paging li a:hover { background-color:#454d50; }
+.home-slider-outer-container .flex-control-paging li a.flex-active,
+.home-news-list-container .flex-control-paging li a.flex-active {background-color:#77bf03;}
+
+.home-slider-container .flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
+.home-slider-container .flex-control-thumbs li {width: 25%; float: left; margin: 0;}
+.home-slider-container .flex-control-thumbs img {width: 100%; display: block; opacity: .7; cursor: pointer;}
+.home-slider-container .flex-control-thumbs img:hover {opacity: 1;}
+.home-slider-container .flex-control-thumbs .flex-active {opacity: 1; cursor: default;}
+
+@media screen and (max-width: 860px) {
+  .home-slider-container .flex-direction-nav .flex-prev {opacity: 1; left: 0;}
+  .home-slider-container .flex-direction-nav .flex-next {opacity: 1; right: 0;}
+}
