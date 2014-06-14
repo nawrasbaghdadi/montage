@@ -12,6 +12,9 @@
 ?>
 <section class="sitefooter">
 	<div class="wrapper relative">
+        <h1 class="page-title normalcase">
+                <span class="title" title="Get in Touch">Keep in Touch</span>
+            </h1>
 		<?php
              $facebook = get_field("facebook", 'options');
              $twitter = get_field("twitter", 'options');

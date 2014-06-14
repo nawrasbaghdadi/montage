@@ -896,6 +896,7 @@ if ( !class_exists( 'wp_user_control_Widget' ) ) {
 		    									</div>
 		    								</form>
 		    							</div>
+		   
 		    						</div>
     					<?php // RESET FORM END ?>
     					<?php // LOGGED IN USER BEGIN ?>

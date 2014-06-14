@@ -191,6 +191,7 @@ rel="<?php echo get_current_user_id().'_/*'.$selection_row->item_id.'_/*'.$item_
             <?php if ( is_active_sidebar( 'login_form_widget' ) ) : ?>
                 <?php dynamic_sidebar( 'login_form_widget' ); ?>
             <?php endif; ?>
+
         </div>
         <?php get_search_form(); ?>
     </div>
@@ -201,4 +202,13 @@ rel="<?php echo get_current_user_id().'_/*'.$selection_row->item_id.'_/*'.$item_
     	<label></label>
     </div>
 </section>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('.news-toggle a').click(function(e) {
+		e.preventDefault();
+		$('.news-toggle').toggleClass('active');
+		$('.latest-news').toggleClass('active');
+	})
+})
+</script>
 			
