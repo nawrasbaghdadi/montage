@@ -1,6 +1,6 @@
 <?php
-define('WP_HOME','http://localhost/montage');
-define('WP_SITEURL','http://localhost/montage');
+define('WP_HOME','http://montage.dev');
+define('WP_SITEURL','http://montage.dev');
 define('WP_DEBUG', false);
 
 /**

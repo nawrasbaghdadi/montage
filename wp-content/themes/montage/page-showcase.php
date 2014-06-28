@@ -12,106 +12,122 @@
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
+error_reporting(E_ALL & ~E_NOTICE);
 
 get_header(); ?>
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/isotope.css" />
+    <!-- Select Style -->
+    
+  
+  <!-- Select Style -->
 <div class="wrapper relative clear showcase-page" style="min-height:340px;">
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("select").selectOrDie();
+    })
+    
+    </script>
+    <?php
+     $category_list =array();
+     $brand_list =array();
+     $client_list =array();
+     $agency_list =array();
+     $showcase_items = new WP_Query( array('meta_key'=>'add_as_showcase',
+                                            'posts_per_page'=>'-1',
+                                            'meta_value' => '1',
+                                            'meta_compare' => '==',
+                                            'order' => 'DESC') );
+        while ($showcase_items->have_posts()) : $showcase_items->the_post();
+            $categorylist = get_the_category();     
+            $brandlist = get_field('brands');       
+            $clientlist = get_field('client');      
+            $agencylist = get_field('agency');      
+            
+            if($categorylist){
+                foreach($categorylist as $category){
+                    $category_list[] = $category->slug;}
+            }   
+            
+            if($brandlist){
+                foreach($brandlist as $brand){
+                    $brand_list[] = $brand->post_name;}
+            }   
+            
+            if($clientlist){            
+                foreach($clientlist as $client){
+                    $client_list[] = $client->post_name;}
+            }   
+            
+            if($agencylist){            
+                foreach($agencylist as $agency){
+                    $agency_list[] = $agency->post_name;}
+            }   
+      
+       endwhile;
+       // print_r($category_list); 
+       // print_r($brand_list); 
+        $category_list = array_unique($category_list);
+        $brand_list = array_unique($brand_list);
+        $client_list = array_unique($client_list);
+        $agency_list = array_unique($agency_list);
+        sort($category_list);
+        sort($brand_list);
+        sort($client_list);
+        sort($agency_list);
+        ?>
+<div id="filter-form" >  
+    <div class="preview" class="mainfilter">  
+            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="category" class="subfilter option-set clearfix cats ">
+                <option id="#all-categories" data-filter-value="" class="selected all" value="">All Categories</option>
+                <?php   $get_showreel = get_category_by_slug('showreel'); ?>
+                <option value=".showreel" id="#showreel" data-filter-value=".showreel">Showreel</option>
+                    <?php foreach($category_list as $category_item){
+
+                        if ($category_item != 'showreel'){ ?>
+                    <option value=".<?php  echo $category_item; ?>" id="#<?php  echo $category_item; ?>" data-filter-value=".<?php  echo $category_item; ?>">
+                            <?php $term = get_term_by('slug', $category_item, 'category'); $cat_name = $term->name; echo $cat_name;?></option>
+                <?php } } ?>
+               
+            </select>
+    </div>
+       <div class="preview">  
+            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="brand"  class="subfilter option-set clearfix">
+                <option id="#all-brands" data-filter-value="" class="selected all" value="">All Brands</option>
+                    <?php foreach($brand_list as $brand_item){ ?>
+                    <option value=".<?php  echo $brand_item; ?>" id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
+                            <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></option>
+                <?php } ?>
+            </select>
+    </div>
+    <div class="preview">   
+            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="client"  class="subfilter option-set clearfix">
+                <option id="#all-clients" data-filter-value="" class="selected all" value="">All Clients</option>
+                    <?php foreach($client_list as $client_item){ ?>
+                     <option value=".<?php  echo $client_item; ?>" id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
+                            <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></option>
+                <?php } ?>
+            </select>
+    </div>
+    <div class="preview">  
+            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="agency"  class="subfilter option-set">
+                <option id="#all-agencies" data-filter-value="" class="selected all" value="">All Agencies</option>
+                    <?php foreach($agency_list as $agency_item){ ?>
+                     <option value=".<?php  echo $agency_item; ?>" id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
+                            <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></option>
+                <?php } ?>
+            </select>
+    </div>
+      
+</div>
+
+
 	<?php while ( have_posts() ) : the_post(); ?>
         <h1 class="page-title">
             <span class="title" title="<?php the_title(); ?>"><?php the_title(); ?></span>
         </h1>
         <?php the_content(); ?>
     <?php endwhile; // end of the loop. ?>
-    <?php
-     $category_list =array();
-     $brand_list =array();
-     $client_list =array();
-     $agency_list =array();
-	 $showcase_items = new WP_Query( array('meta_key'=>'add_as_showcase',
-	 										'posts_per_page'=>'-1',
-											'meta_value' => '1',
-											'meta_compare' => '==',
-											'order' => 'DESC') );
-		while ($showcase_items->have_posts()) : $showcase_items->the_post();
-			$categorylist = get_the_category();		
-			$brandlist = get_field('brands');		
-			$clientlist = get_field('client');		
-			$agencylist = get_field('agency');		
-			
-			if($categorylist){
-				foreach($categorylist as $category){
-					$category_list[] = $category->slug;}
-			}	
-			
-			if($brandlist){
-				foreach($brandlist as $brand){
-					$brand_list[] = $brand->post_name;}
-			}	
-			
-			if($clientlist){			
-				foreach($clientlist as $client){
-					$client_list[] = $client->post_name;}
-			}	
-			
-			if($agencylist){			
-				foreach($agencylist as $agency){
-					$agency_list[] = $agency->post_name;}
-			}	
-	  
-	   endwhile;
-	   // print_r($category_list); 
-	   // print_r($brand_list); 
-		$category_list = array_unique($category_list);
-		$brand_list = array_unique($brand_list);
-		$client_list = array_unique($client_list);
-		$agency_list = array_unique($agency_list);
-		sort($category_list);
-		sort($brand_list);
-		sort($client_list);
-		sort($agency_list);
-		?>
-    <ul class="mainfilter">
-    	<li><label>All Categories</label><span class="icons"></span>
-            <ul class="subfilter option-set clearfix cats" data-filter-group="category"> 
-                <li><a id="#all-categories" data-filter-value="" class="selected all">All Categories</a></li>
-                <?php   $get_showreel = get_category_by_slug('showreel'); ?>
-                <li><a id="#showreel" data-filter-value=".showreel">
-                        Showreel</a></li>
-                <?php foreach($category_list as $category_item){
-                        if ($category_item != 'showreel'){ ?>
-                    <li><a id="#<?php  echo $category_item; ?>" data-filter-value=".<?php  echo $category_item; ?>">
-                            <?php $term = get_term_by('slug', $category_item, 'category'); $cat_name = $term->name; echo $cat_name;?></a></li>
-                <?php } } ?>
-            </ul>
-    	</li>
-    	<li><label>All Brands</label><span class="icons"></span>
-            <ul class="subfilter option-set clearfix " data-filter-group="brand"> 
-                <li><a id="#all-brands" data-filter-value="" class="selected all">All Brands</a></li>
-                <?php foreach($brand_list as $brand_item){ ?>
-                    <li><a id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
-                            <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></a></li>
-                <?php } ?>
-            </ul>
-        </li>
-    	<li><label>All Clients</label><span class="icons"></span>
-            <ul class="subfilter option-set clearfix " data-filter-group="client"> 
-                <li><a id="#all-clients" data-filter-value="" class="selected all">All Clients</a></li>
-                <?php foreach($client_list as $client_item){ ?>
-                    <li><a id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
-                            <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></a></li>
-                <?php } ?>
-            </ul>
-        </li>
-    	<li><label>All Agencies</label><span class="icons"></span>
-            <ul class="subfilter option-set clearfix " data-filter-group="agency"> 
-                <li><a id="#all-agencies" data-filter-value="" class="selected all">All Agencies</a></li>
-                <?php foreach($agency_list as $agency_item){ ?>
-                    <li><a id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
-                            <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></a></li>
-                <?php } ?>
-            </ul>
-        </li>
-    </ul>
+    
 	<div class="clear"></div> 
 	<?php
 		global $wpdb;
@@ -200,29 +216,42 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
             }
         });
 
-        // filter buttons
-        $('.subfilter a').click(function () {
-            var $this = $(this);
+       
+        $('select').change(function () {
+              
+           
+           
+                var vall = $(this).val();
+
+                $('select').find("option").removeClass('selected');
+                var ss=$(this).find("option[value='"+vall+"']").addClass('selected');
+
+                
             // don't proceed if already selected
-            if ($this.hasClass('selected')) {
+            if ($(this).hasClass('selected')) {
                 return;
             }
-
-            var $optionSet = $this.parents('.option-set');
+           // $this.addClass('selected');
+            var $optionSet = $(this).closest('.option-set');
+          
             // change selected class
-            $optionSet.find('.selected').removeClass('selected');
-            $this.addClass('selected');
+            //$this.siblings().removeClass('selected');
+           // $this.addClass('selected');
 
             // store filter value in object
             // i.e. filters.color = 'red'
             var group = $optionSet.attr('data-filter-group');
-            filters[group] = $this.attr('data-filter-value');
+           
+            filters[group] = $optionSet.attr('value');
+           
             // convert object into array
             var isoFilters = [];
             for (var prop in filters) {
+              
                 isoFilters.push(filters[prop])
             }
             var selector = isoFilters.join('');
+           
             $container.isotope({ filter: selector });
 
             return false;
@@ -256,4 +285,5 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
             });
         });
     </script>
+</div>
 <?php get_footer(); ?>

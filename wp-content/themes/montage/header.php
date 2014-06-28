@@ -40,6 +40,9 @@
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.bgpos.js"></script>
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/flexslider.css" type="text/css" media="screen" />
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.placeholder.js"></script>
+
+   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/src/selectordie.min.js"></script>
+  	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/js/src/selectordie.css"/>
     
     
     <script type="text/javascript">
@@ -187,13 +190,28 @@ rel="<?php echo get_current_user_id().'_/*'.$selection_row->item_id.'_/*'.$item_
             </a>
         </h1>
         <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container_class' => 'menu-container' ) ); ?>
-        <div class="header-login-form hidden">
+        <div class="header-login-form hidden-el">
             <?php if ( is_active_sidebar( 'login_form_widget' ) ) : ?>
                 <?php dynamic_sidebar( 'login_form_widget' ); ?>
             <?php endif; ?>
 
         </div>
-        <?php get_search_form(); ?>
+        	<?php
+             $facebook = get_field("facebook", 'options');
+             $twitter = get_field("twitter", 'options');
+             $linkedin = get_field("linkedin", 'options'); 
+             $vimeo = get_field("vimeo", 'options'); 
+      
+            if($twitter || $vimeo || $facebook || $linkedin){ ?>
+            <div class="social-menu-container">
+                <ul>
+					<?php if($facebook){ ?><li><a href="<?php echo $facebook; ?>" target="_blank" class="facebook icons"></a></li><?php } ?>
+                    <?php if($vimeo){ ?><li><a href="<?php echo $vimeo; ?>" target="_blank" class="vimeo icons"></a></li><?php } ?>
+                    <?php if($twitter){ ?><li><a href="<?php echo $twitter; ?>" target="_blank" class="twitter icons"></a></li><?php } ?>
+                    <?php if($linkedin){ ?><li><a href="<?php echo $linkedin; ?>" target="_blank" class="linkedin icons"></a></li><?php } ?>
+                </ul>
+            </div>
+		<?php } ?>
     </div>
 </section>
 <section class="sitecontent <?php if(is_page(2)){ echo"homecontent";} ?> clear">

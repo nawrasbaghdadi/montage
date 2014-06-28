@@ -1,6 +1,6 @@
 <?php
-update_option('siteurl','http://localhost/montage');
-update_option('home','http://localhost/montage');
+update_option('siteurl','http://montage.dev');
+update_option('home','http://montage.dev');
 /**
  * Twenty Twelve functions and definitions.
  *

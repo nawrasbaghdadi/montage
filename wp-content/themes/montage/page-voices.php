@@ -44,7 +44,15 @@ get_header(); ?>
   transition-delay: 0s, 0.8s, 0s;
 }
 </style>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $("select").selectOrDie();
+    })
+    
+    </script>
 <div class="wrapper relative clear voices-page" style="min-height:340px;">
+
+ 
 	<?php while ( have_posts() ) : the_post(); ?>
         <h1 class="page-title">
             <span class="title" title="<?php the_title(); ?>"><?php the_title(); ?></span>
@@ -61,61 +69,62 @@ get_header(); ?>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/soundcloud.player.api.js"></script>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/sc-player.js"></script>
     <div class="clear space10"></div>
-    
-    <ul class="mainfilter">
-    	<li><label>All Languages</label><span class="icons"></span>
-            <ul class="subfilter option-set clearfix" data-filter-group="language">
-                <li><a id="#all-languages" data-filter-value="" class="selected all">All Languages</a></li>
-				<?php 
+       <div id="filter-form" >  
+    <div class="preview" class="mainfilter">  
+            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="language" class="subfilter option-set clearfix cats ">
+                <option id="#all-languages" data-filter-value="" class="selected all" value="">All Languages</option>
+                    <?php 
                  $languages = get_terms("language");
                  $lang_count = count($languages);
                  if ( $lang_count > 0 ){
                      foreach ( $languages as $language) {?>
-                <li><a id="#<?php  echo $language->slug; ?>" data-filter-value=".<?php  echo $language->slug; ?>">
-                        <?php echo $language->name;?></a></li>
+                <option id="#<?php  echo $language->slug; ?>" data-filter-value=".<?php  echo $language->slug; ?>" value=".<?php  echo $language->slug; ?>" >
+                        <?php echo $language->name;?></option>
                 <?php } } ?>
-            </ul>
-    	</li>
-    	<li><label>All Accents</label><span class="icons"></span>
-            <ul class="subfilter option-set clearfix " data-filter-group="accent"> 
-                <li><a id="#all-accents" data-filter-value="" class="selected all">All Accents</a></li>
-				<?php 
+               
+            </select>
+    </div>
+       <div class="preview">  
+            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="accent"  class="subfilter option-set clearfix">
+                <option id="#all-accents" data-filter-value="" class="selected all" value="">All Accents</option>
+                           <?php 
                  $accents = get_terms("accent");
                  $accent_count = count($accents);
                  if ( $accent_count > 0 ){
                      foreach ( $accents as $accent) {?>
-                <li><a id="#<?php  echo $accent->slug; ?>" data-filter-value=".<?php  echo $accent->slug; ?>">
-                        <?php echo $accent->name;?></a></li>
+                <option  id="#<?php  echo $accent->slug; ?>" data-filter-value=".<?php  echo $accent->slug; ?>" value=".<?php  echo $accent->slug; ?>">
+                        <?php echo $accent->name;?></option>
                 <?php } } ?>
-            </ul>
-        </li>
-    	<li><label>All Genders</label><span class="icons"></span>
-            <ul class="subfilter option-set clearfix " data-filter-group="gender"> 
-                <li><a id="#all-genders" data-filter-value="" class="selected all">All Genders</a></li>
-				<?php 
+            </select>
+    </div>
+    <div class="preview">   
+            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="gender"  class="subfilter option-set clearfix">
+                <option id="#all-genders" data-filter-value="" class="selected all" value="">All Genders</option>
+                  <?php 
                  $genders = get_terms("voice_gender");
                  $gender_count = count($genders);
                  if ( $gender_count > 0 ){
                      foreach ( $genders as $gender) {?>
-                <li><a id="#<?php  echo $gender->slug; ?>" data-filter-value=".<?php  echo $gender->slug; ?>">
-                        <?php echo $gender->name; ?></a></li>
+                <option id="#<?php  echo $gender->slug; ?>" data-filter-value=".<?php  echo $gender->slug; ?>" value=".<?php  echo $gender->slug; ?>"> 
+                        <?php echo $gender->name; ?></option>
                 <?php } } ?>
-            </ul>
-        </li>
-    	<li><label>All Age Brackets</label><span class="icons"></span>
-            <ul class="subfilter option-set clearfix " data-filter-group="agency"> 
-                <li><a id="#all-brackets" data-filter-value="" class="selected all">All Age Brackets</a></li>
-				<?php 
+            </select>
+    </div>
+    <div class="preview">  
+            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="agency"  class="subfilter option-set">
+                <option id="#all-brackets" data-filter-value="" class="selected all" value="">All Age Brackets</option>
+                    <?php 
                  $brackets = get_terms("age_bracket");
                  $bracket_count = count($brackets);
                  if ( $bracket_count > 0 ){
                      foreach ( $brackets as $bracket) {?>
-                <li><a id="#<?php  echo $bracket->slug; ?>" data-filter-value=".<?php  echo $bracket->slug; ?>">
-                        <?php echo $bracket->name; ?></a></li>
+                <option id="#<?php  echo $bracket->slug; ?>" data-filter-value=".<?php  echo $bracket->slug; ?>" value=".<?php  echo $bracket->slug; ?>">
+                        <?php echo $bracket->name; ?></option>
                 <?php } } ?>
-            </ul>
-        </li>
-    </ul>
+            </select>
+    </div>
+      
+</div>
     <div class="clear space25"></div>
     <div class="voice_list_header">
         <div class="selection_status">&nbsp;</div>
@@ -284,24 +293,33 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
   			transformsEnabled: false
 
         });
+              $('select').change(function () {
+              
+           
+           
+                var vall = $(this).val();
 
-        // filter buttons
-        $('.subfilter a').click(function () {
-            var $this = $(this);
+                $('select').find("option").removeClass('selected');
+                var ss=$(this).find("option[value='"+vall+"']").addClass('selected');
+
+                
             // don't proceed if already selected
-            if ($this.hasClass('selected')) {
+            if ($(this).hasClass('selected')) {
                 return;
             }
-
-            var $optionSet = $this.parents('.option-set');
+           // $this.addClass('selected');
+            var $optionSet = $(this).closest('.option-set');
+          
             // change selected class
-            $optionSet.find('.selected').removeClass('selected');
-            $this.addClass('selected');
+            //$this.siblings().removeClass('selected');
+           // $this.addClass('selected');
 
             // store filter value in object
             // i.e. filters.color = 'red'
             var group = $optionSet.attr('data-filter-group');
-            filters[group] = $this.attr('data-filter-value');
+           
+            filters[group] = $optionSet.attr('value');
+           
             // convert object into array
             var isoFilters = [];
             for (var prop in filters) {
@@ -312,6 +330,7 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
 
             return false;
         });
+        // filter buttons
 
     });
 </script>
@@ -354,7 +373,17 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
             	$(".mainfilter>li").has(this).find('label').text(selectedCat);
                 return false;
             });
+
+            ////////////////////////////
+            $('body').on('click','.play_btn',function(){
+                $(this).parents('li').addClass('now-playing');
+            })
+              $('body').on('click','.selection_status',function(){
+                $(this).parents('li').toggleClass('selected');
+            })
+            
         });
+
     </script>
-    
+    </div>
 <?php get_footer(); ?>

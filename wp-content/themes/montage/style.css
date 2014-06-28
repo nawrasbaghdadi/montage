@@ -13,7 +13,6 @@ This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
 
-html{margin:0;padding:0;height:100%;width:100%;background-color:#252e33;}
 @media screen and (max-width: 1600px) {
 	/* html{zoom:0.9;} */
 }
@@ -152,9 +151,8 @@ textarea{outline:none;}
 .search-container #searchform .screen-reader-text{display:none;}
 
 
-.sitecontent{background-color:#ffffff;padding:15px 0px 30px 0px;min-width:1000px;}
+.sitecontent{background-color:#ffffff;padding:15px 0px 0 0px;min-width:1000px;}
 
-.sitecontent.homecontent{}
 
 .sitecontent h1.page-title{height:39px;padding:0px;margin:0px 0px 20px 0px;position: relative;border-bottom:1px solid #77b900;text-transform:uppercase;}
 .sitecontent h1.page-title.normalcase{text-transform:none;}
@@ -176,7 +174,8 @@ textarea{outline:none;}
 .sitecontent h1.page-title-inside:before{top:2px;left:1px }
 .sitecontent h1.page-title-inside:after{top:2px;left:1px }
 
-.showcase-page h1.page-title{text-transform:uppercase;margin:10px 2px 0px 0px;}
+
+
 
 .showcase-details-page h1.page-title-inside{margin-bottom:5px;}
 .showcase-details-page h2.sub-title-inside{font-weight: normal;margin:0px 0px 10px 0px;padding:0;color:#77b900;font-size:22px;}
@@ -483,7 +482,7 @@ div#respond input[type="submit"]:focus{background-color:#77b900;color:#ffffff;}
 .voices-page ul.mainfilter>li a.selected:hover{color:#77b900;}
 .voices-page ul.mainfilter>li a.all{font-weight:bold;}
 
-.player-container{background-color:#efefef;display:none;height:90px;position:relative;top:-15px;
+.player-container{background-color:#efefef;display:none;height:90px;position:relative;top:5px;z-index: 99;
 											box-shadow: 1px 1px 10px #000;
 											-moz-box-shadow: 1px 1px 10px #000;
 											-webkit-box-shadow: 1px 1px 10px #000;}
@@ -582,7 +581,7 @@ section.xpert-solutions-signature{margin:0px auto;padding:5px 0px;text-align:lef
 section.xpert-solutions-signature a{border:0px;text-decoration:none;color:#979797;}
 section.xpert-solutions-signature a img{border:0px;position:relative;top:5px;}
 /*********UPDATES*********/
-.hidden{
+.hidden-el{
 	display: none !important;
 }
 .siteheader #searchform input[type="text"]{
@@ -590,7 +589,7 @@ section.xpert-solutions-signature a img{border:0px;position:relative;top:5px;}
 }
 .siteheader,
 .siteheader .wrapper{
-	height: 75px;
+	height: 85px;
 }
 .siteheader #searchform{
 	top:36px;
@@ -709,7 +708,89 @@ section.xpert-solutions-signature a img{border:0px;position:relative;top:5px;}
 	height: 100%;
 	cursor: pointer;
 }
-
 .sitefooter .social-menu-container{
 	top: 60px;
 }
+.sitefooter{
+	background: #252e33;
+	padding-top: 0;
+	margin-top: 60px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 9;
+}
+.sitefooter .title{
+	background: #252e33 !important;
+	color: #77b900 !important;
+}
+/******ShowCase****/
+#filter-form{
+	position: absolute;
+	top:146px;
+	left: -208px;
+	width: 200px;
+	height: 300px;
+}
+
+.showcase-page p{
+	padding: 20px 0;
+}
+.voices-page #filter-form{
+	top:115px;
+}
+.voice_list .now-playing{
+	background-color: #eee !important;
+}
+.voice_list .selected{
+	background-color: #e1e1e1 !important;	
+}
+/*******Header*******/
+.social-menu-container{position:absolute;top:40px;right:0px;padding:0px;margin:0px;z-index:100;}
+.social-menu-container>ul{list-style:none;padding:0px;margin:0px;white-space:nowrap;}
+.social-menu-container>ul>li{padding:0px;margin:0px 0px 0px 6px;float:left;}
+.social-menu-container>ul>li>a{margin:0px;display:block;height:17px;width:17px;overflow:hidden;text-indent:-99999px;}
+.social-menu-container>ul>li>a.facebook{background-position:-10px 0px;}
+.social-menu-container>ul>li>a.facebook:hover{background-position:-10px -17px;}
+.social-menu-container>ul>li>a.vimeo{background-position:-27px 0px;}
+.social-menu-container>ul>li>a.vimeo:hover{background-position:-27px -17px;}
+.social-menu-container>ul>li>a.twitter{background-position:-44px 0px;}
+.social-menu-container>ul>li>a.twitter:hover{background-position:-44px -17px;}
+.social-menu-container>ul>li>a.linkedin{background-position:-61px 0px;}
+.social-menu-container>ul>li>a.linkedin:hover{background-position:-61px -17px;}
+.siteheader .menu-container>ul>li{
+	display: block;
+	height: 100%;
+	 -webkit-transition: all 0.2s linear; 
+    transition: all 0.2s linear;
+}
+
+.siteheader .menu-container>ul>li a{
+width: 90px;
+height: 40px;
+line-height: 53px;
+border-bottom: 4px solid #77b900;
+padding:0px;
+color: #fff;
+display: block;
+text-align: center;
+-webkit-transition: .2s all linear;
+-moz-transition: .2s all linear;
+-o-transition: .2s all linear;
+transition: .2s all linear
+}
+.siteheader .menu-container>ul>li.current-menu-item>a,
+.siteheader .menu-container>ul>li:hover >a{
+	border-bottom: 35px solid #77b900;
+	height: 9px;
+	color: #fff;
+}
+.siteheader .menu-container>ul>li.current-menu-item:hover>a{
+	color: #fff;
+}
+.wrapper.relative.showcase-page,
+.wrapper.relative.voices-page{
+	padding-top: 20px;
+}
+/*******Header*******/	
+
