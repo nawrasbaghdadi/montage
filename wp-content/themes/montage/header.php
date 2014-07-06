@@ -31,6 +31,8 @@
   
     <?php wp_head(); ?>
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.png" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css" media="all" rel="stylesheet">
     
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/global.js"></script>
     <script language="javascript" type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery-1.7.2.min.js"></script>
@@ -42,6 +44,8 @@
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.placeholder.js"></script>
 
    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/src/selectordie.min.js"></script>
+   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/src/jquery.inview.min.js"></script>
+
   	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/js/src/selectordie.css"/>
     
     

@@ -57,6 +57,7 @@ get_header(); ?>
         <h1 class="page-title">
             <span class="title" title="<?php the_title(); ?>"><?php the_title(); ?></span>
         </h1>
+        <div class="helper-color"><span class="label label-selected">Selected</span><span class="label label-played">Played</span><span class="label label-now">Playing Now</span></div>
         <?php the_content(); ?>
     <?php endwhile; // end of the loop. 
 	// if it is the Voices page, then query the voice list below
@@ -376,7 +377,15 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
 
             ////////////////////////////
             $('body').on('click','.play_btn',function(){
+                if($(this).parents('li').siblings().hasClass('now-playing')){
+                    var ss = $('li.now-playing');
+                    console.log(ss);
+                    ss.removeClass('now-playing');
+                    ss.addClass('played');
+                }else{
                 $(this).parents('li').addClass('now-playing');
+               
+                }
             })
               $('body').on('click','.selection_status',function(){
                 $(this).parents('li').toggleClass('selected');
