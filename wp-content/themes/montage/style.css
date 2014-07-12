@@ -49,7 +49,7 @@ textarea{outline:none;}
 
 .my-selection-container{position:fixed;top:184px;right:-250px;width:250px;height:400px;z-index:9999;}
 .my-selection-container .inner{position:relative;}
-.my-selection-container .trigger{display:block;position:absolute;top:45px;left:-75px;height:30px;width:120px;text-align:center;line-height:30px;font-weight:normal;color:#77b900;font-size:14px;text-decoration:none;background-color:#252e33;cursor:pointer;
+.my-selection-container .trigger{display:block;position:absolute;top:83px;left:-75px;height:30px;width:120px;text-align:center;line-height:30px;font-weight:normal;color:#77b900;font-size:14px;text-decoration:none;background-color:#252e33;cursor:pointer;
 				transform:rotate(-90deg);
 				-ms-transform:rotate(-90deg); /* IE 9 */
 				-moz-transform:rotate(-90deg); /* Firefox */
@@ -577,9 +577,9 @@ div#respond input[type="submit"]:focus{background-color:#77b900;color:#ffffff;}
 .sitefooter .contact-form div.wpcf7-mail-sent-ok{padding:0px;margin:0px;position:absolute;top:-25px;left:0px;border:0px;color:#77b900;font-size:12px;}
 .sitefooter .contact-form .ajax-loader{padding:0px;margin:0px;position:absolute;border:0px;top:5px;right:195px;}
 
-section.xpert-solutions-signature{margin:0px auto;padding:5px 0px;text-align:left;width:100%;font-size:11px;text-indent:360px;}
-section.xpert-solutions-signature a{border:0px;text-decoration:none;color:#979797;}
-section.xpert-solutions-signature a img{border:0px;position:relative;top:5px;}
+section.montage-signature{margin:0px auto;padding:5px 0px;text-align:left;width:100%;font-size:11px;text-indent:360px;}
+section.montage-signature a{border:0px;text-decoration:none;color:#979797;}
+section.montage-signature a img{border:0px;position:relative;top:5px;}
 /*********UPDATES*********/
 .hidden-el{
 	display: none !important;
@@ -726,9 +726,9 @@ section.xpert-solutions-signature a img{border:0px;position:relative;top:5px;}
 }
 /******ShowCase****/
 #filter-form{
-	position: absolute;
-	top:146px;
-	left: -208px;
+	position: fixed;
+	top: 256px;
+	left: 10px;
 	width: 200px;
 	height: 300px;
 }
@@ -737,7 +737,7 @@ section.xpert-solutions-signature a img{border:0px;position:relative;top:5px;}
 	padding: 20px 0;
 }
 .voices-page #filter-form{
-	top:115px;
+	top:238px;
 }
 li.voice_item {
 	padding-left: 0;
@@ -1035,4 +1035,26 @@ border-radius: 4px;
 }
 
 /*******Contact Us Page*******/	
-
+.tab {
+    float:left;
+    display:block;
+    padding:10px 20px;
+    text-decoration:none;
+    border-radius:5px 5px 0 0;
+    background:#F9F9F9;
+    color:#777;
+}
+.tab.active,
+.tab:hover {
+	background:#DDD;
+	color:#222;
+}
+.content {
+    display:none;
+    clear:both;
+    xbackground:#FFF;
+   xpadding:20px;
+}
+.content.active {
+    display:block;
+}

@@ -45,6 +45,7 @@
 
    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/src/selectordie.min.js"></script>
    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/src/jquery.inview.min.js"></script>
+   <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/src/jquery.cookie.js"></script>
 
   	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/js/src/selectordie.css"/>
     
@@ -136,53 +137,25 @@ expires = "; expires=" + date.toGMTString();
 <div class="my-selection-container">
     <div class="inner">
         <a class="trigger">My Selection</a>
-        <div class="inside">
-        	<div class="inside_list">
-        	<?php if(!is_user_logged_in()){ ?>
-            	<div>Howdy Guest,</div><div class="space10"></div><div>Please sign in in order to view your selection.</div>
-        	<?php }else{ ?>
-                <ul class="ul_inside">
-	<?php 
-	
-		global $wpdb;
-		$current_user_id =  get_current_user_id();
-		$selection_table = $wpdb->get_results( "SELECT distinct item_id item_id , id id FROM xs_my_selection where user_id = ".$current_user_id." ORDER BY id DESC" );
-		if ( $selection_table )
-		{
-			foreach ( $selection_table as $selection_row ) {
-				// rel = user_id _/* post_id _/* post_title _/* post_thumbnail _/* voice_talent _/* post_type _/* permalink
-				if(get_post_type( $selection_row->item_id ) =='post'){ ?>
-					<li id="item-<?php echo get_current_user_id().'-'.$selection_row->item_id; ?>" class="video">
-                    	<a class="permalink" href="<?php echo get_permalink($selection_row->item_id); ?>">
-                        	<?php if (has_post_thumbnail( $selection_row->item_id ) ): ?>
-							<?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $selection_row->item_id ), 'thumbnail' ); ?>
-                            	<img src='<?php echo $image[0]; ?>' />
-                            <?php endif; ?>
-                        	<label><?php $item_title = get_the_title($selection_row->item_id); echo $item_title; ?></label>
-                        </a>
-<a class="selection-button remove-from-selection icons" 
-rel="<?php echo get_current_user_id().'_/*'.$selection_row->item_id.'_/*'.$item_title.'_/*'.$image[0].'_/*null_/*video_/*'.get_permalink(10); ?>" title="Remove from My Selection"></a>
-                    </li>
-				<?php }else{ ?>       
-					<li id="item-<?php echo get_current_user_id().'-'.$selection_row->item_id; ?>" class="voice">
-                    	<a class="permalink" href="<?php echo get_permalink(10); ?>?v_id=<?php echo $selection_row->item_id; ?>">
-                        	<?php $item_title = get_the_title($selection_row->item_id); echo $item_title; ?>
-                        </a>
-                        <em>by <?php $talents = get_field('talent',$selection_row->item_id); foreach($talents as $talent){$talent_name  = get_the_title($talent); } echo $talent_name?></em>
-<a class="selection-button remove-from-selection icons" 
-rel="<?php echo get_current_user_id().'_/*'.$selection_row->item_id.'_/*'.$item_title.'_/*null_/*'.$talent_name.'_/*voice_/*'.get_permalink(10); ?>" title="Remove from My Selection"></a>
-                     </li>
-				<?php } }	
-			}
-			else
-			{
-				?>
-				<li class="no-items-found">No items were added!</li>
-				<?php
-			}?>
-            </ul>
-            <?php } ?>
+        <div class="tabs">
+          <a href="#" data-tab="1" class="tab active">Videos</a>
+          <a href="#" data-tab="2" class="tab">Voices</a>
+          <div data-content="1" class="content active" id="videos">
+            <div class="inside">
+            	<div class="inside_list">            
+                    <ul class="ul_inside">
+                    </ul>
+                </div>            
             </div>
+          </div>
+          <div data-content="2" class="content active" id="voices">
+                <div class="inside">
+                <div class="inside_list">
+                    <ul class="ul_inside">
+                </ul>
+                </div>
+                </div>
+          </div>
         </div>
     </div>
 </div>
@@ -232,5 +205,20 @@ $(document).ready(function () {
 		$('.latest-news').toggleClass('active');
 	})
 })
+$(function () {
+    
+      $('[data-tab]').on('click', function (e) {
+        $(this)
+          .addClass('active')
+          .siblings('[data-tab]')
+          .removeClass('active')
+          .siblings('[data-content=' + $(this).data('tab') + ']')
+          .addClass('active')
+          .siblings('[data-content]')
+          .removeClass('active');
+        e.preventDefault();
+      });
+      
+    });
 </script>
 			

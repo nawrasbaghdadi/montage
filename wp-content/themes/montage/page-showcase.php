@@ -173,21 +173,29 @@ get_header(); ?>
        
 				
             <li class="project-item <?php echo $post_cats ;?> <?php echo $post_brands ;?>  <?php echo $post_clients ;?>  <?php echo $post_agencies ;?> ">
-            	<?php  if (in_array($post->ID, $current_user_id_array)) { ?>
-
-<a id="add_item_<?php echo $post->ID; ?>" class="selection-button add-to-selection" 
-rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*'.$post_thumbnail_url.'_/*null_/*video_/*'.get_permalink($post->ID); ?>" style="display:none;"><b><span class="icons"></span><label>Add to My Selection</label></b></a>
-<a id="remove_item_<?php echo $post->ID; ?>" class="selection-button remove-from-selection" 
-rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*'.$post_thumbnail_url.'_/*null_/*video_/*'.get_permalink($post->ID); ?>" style="display:block;"><b><span class="icons"></span><label>Remove from My Selection</label></b></a>
-
-					<?php  } else { ?>
-                
-<a id="add_item_<?php echo $post->ID; ?>" class="selection-button add-to-selection" 
+                <script type="text/javascript">
+                jQuery(document).ready(function(){
+                if (jQuery.cookie('post_thumb')){
+                var obj_arr = JSON.parse(jQuery.cookie("post_thumb"));
+               var ids = [];
+                if (obj_arr.length>0){
+                for (var i =0 ; i<obj_arr.length; i++)
+                    ids.push(obj_arr[i].id);
+                }
+               if($.inArray('<?php echo $post->ID; ?>',ids)!== -1)
+                   {
+                    $("#add_item_<?php echo $post->ID; ?>").css("display","none");
+                    $("#remove_item_<?php echo $post->ID; ?>").css("display","block");
+                    }
+                }
+                    })
+                </script>
+            
+<a id="add_item_<?php echo $post->ID; ?>"  class="selection-button add-to-selection" 
 rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*'.$post_thumbnail_url.'_/*null_/*video_/*'.get_permalink($post->ID); ?>"><b><span class="icons"></span><label>Add to My Selection</label></b></a>
 <a id="remove_item_<?php echo $post->ID; ?>" class="selection-button remove-from-selection" 
 rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*'.$post_thumbnail_url.'_/*null_/*video_/*'.get_permalink($post->ID); ?>"><b><span class="icons"></span><label>Remove from My Selection</label></b></a>
 
-					<?php  } ?>
 
                 <a class="post_link" href="<?php the_permalink(); ?>">
                 	<span>

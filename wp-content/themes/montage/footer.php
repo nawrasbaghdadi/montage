@@ -59,12 +59,10 @@
             <?php endif; ?>
         </section>-->
         <div class="clear"></div>
-        <section class="copyright" style="display:none;">
-        	&copy; <script>document.write(year); </script> &bull; MONTAGE &bull; All rights are reserved.
-        </section>
-        <section class="xpert-solutions-signature">
-            <a href="http://www.xpert-online.com" target="_blank">Creative Digital Marketing Agency
-            	<img title="Website Design & Development Company" src="http://www.xpert-online.com/images/signature-xpert.png" alt="Xpert Solutions - Website Design & Development Company" /></a>
+        
+        <section class="montage-signature">
+            <a href="http://www.montage-me.com" target="_blank">&copy; <script>document.write(year); </script> Montage. All Rights Reserved.
+            	
         </section>
         <div class="clear"></div>
     </div>
