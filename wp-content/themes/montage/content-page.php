@@ -8,6 +8,8 @@
  */
 ?>
  <script src="https://maps.googleapis.com/maps/api/js"></script>
+ <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/src/jquery.validation.js"></script>
+ <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/src/main.js"></script>
     <script>
      function initialize() {
 		var myLatlng = new google.maps.LatLng(25.107892,55.197865);
@@ -102,7 +104,7 @@ var marker = new google.maps.Marker({
           <label class="control-label sr-only">your Massage</label>
           <div class="input-group-addon">
           </div>
-          <textarea class="form-control"></textarea>
+          <textarea class="form-control text-area" placeholder="Your Massage"></textarea>
           
         </div>
         <div class="form-group submit">

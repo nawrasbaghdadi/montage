@@ -830,9 +830,11 @@ transition: .2s all linear
 .siteheader .menu-container>ul>li.current-menu-item:hover>a{
 	color: #fff;
 }
-.wrapper.relative.showcase-page,
-.wrapper.relative.voices-page{
-	padding-top: 20px;
+.sitecontent{
+	padding-top: 30px !important;
+}
+.sitecontent.homecontent{
+	padding-top: 0 !important;
 }
 /*******Header*******/	
 /*******Contact Us Page*******/
@@ -862,18 +864,22 @@ transition: opacity .6s .1s,transform .6s ease;
 }
 .left{
 	float: left;
-	margin-top: 20px;
+	background-color: #252e33;
+	color: #fff;
 }
 .right{
 	float: right;
+	background-color: #252e33;
+	color: #fff;
+	margin-top: 10px;
 }
 .address .pull-right{
-	text-align: right;
-	padding-right: 30px;
+	text-align: center;
+	padding-top: 20px;
 }
 .address .left-txt{
-	text-align: left;
-	padding-left: 15px;
+	text-align: center;
+	padding-top: 20px;
 }
 .wrapper-form {
   display: block;
@@ -1061,4 +1067,7 @@ border-radius: 4px;
 }
 .content.active {
     display:block;
+}
+.text-area{
+	height: 80px !important;
 }
