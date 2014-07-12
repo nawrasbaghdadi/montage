@@ -138,9 +138,9 @@ expires = "; expires=" + date.toGMTString();
     <div class="inner">
         <a class="trigger">My Selection</a>
         <div class="tabs">
-          <a href="#" data-tab="1" class="tab active">Videos</a>
-          <a href="#" data-tab="2" class="tab">Voices</a>
-          <div data-content="1" class="content active" id="videos">
+          <a href="#" data-tab="video" class="tab active" id="voe"><i class="fa fa-video-camera"></i> Videos</a>
+          <a href="#" data-tab="voice" class="tab" id="voi"><i class="fa fa-bullhorn"></i> Voices</a>
+          <div data-content="video" class="content active" id="videos">
             <div class="inside">
             	<div class="inside_list">            
                     <ul class="ul_inside">
@@ -148,7 +148,7 @@ expires = "; expires=" + date.toGMTString();
                 </div>            
             </div>
           </div>
-          <div data-content="2" class="content active" id="voices">
+          <div data-content="voice" class="content active" id="voices">
                 <div class="inside">
                 <div class="inside_list">
                     <ul class="ul_inside">

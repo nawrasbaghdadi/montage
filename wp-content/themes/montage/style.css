@@ -71,7 +71,10 @@ textarea{outline:none;}
 .my-selection-container .inside .inside_list .ul_inside>li.video a.permalink{display:block;text-decoration:none;font-size:12px;}
 .my-selection-container .inside .inside_list .ul_inside>li.video a.permalink img{width:200px;height:100px;border:0px;}
 .my-selection-container .inside .inside_list .ul_inside>li.video a.permalink label{display:block;height:16px;line-height:16px;color:#fff;text-decoration:none;}
-.my-selection-container .inside .inside_list .ul_inside>li.voice{padding-bottom:6px;}
+.my-selection-container .inside .inside_list .ul_inside>li.voice{
+	padding-bottom:6px;
+	border-bottom: 1px solid #333;
+}
 .my-selection-container .inside .inside_list .ul_inside>li.voice a.permalink{display:block;text-decoration:none;font-size:12px;color:#fff;line-height:14px;}
 .my-selection-container .inside .inside_list .ul_inside>li.voice em{font-size:10px;color:#ccc;line-height:14px;}
 
@@ -638,8 +641,9 @@ section.montage-signature a img{border:0px;position:relative;top:5px;}
 	text-align: center;
 }
 .sitecontent h1.page-title .title:before, .sitecontent h1.page-title .title:after{
-	color: #fff !important;
-	content: '' !important;
+	xcolor: #fff !important;
+	xcontent: '' !important;
+	right: 9px;
 }
 .latest-news{
 	position: fixed;
@@ -1033,7 +1037,9 @@ background-color: #eee;
 border: 1px solid #ccc;
 border-radius: 4px;
 }
-
+.showcase-details-page{
+	margin-top: 30px;
+}
 /*******Contact Us Page*******/	
 .tab {
     float:left;
@@ -1041,19 +1047,17 @@ border-radius: 4px;
     padding:10px 20px;
     text-decoration:none;
     border-radius:5px 5px 0 0;
-    background:#F9F9F9;
-    color:#777;
+    background:#77b900;
+    color:#fff;
 }
 .tab.active,
 .tab:hover {
-	background:#DDD;
-	color:#222;
+	background:#000;
+	color:#fff;
 }
 .content {
     display:none;
     clear:both;
-    xbackground:#FFF;
-   xpadding:20px;
 }
 .content.active {
     display:block;

@@ -21,7 +21,8 @@ get_header(); ?>
 		if ( $voice_query->have_posts() ) :
 			while ( $voice_query->have_posts() ) : $voice_query->the_post();
 				$voice_url = get_field('voice_url');
-				$talents = get_field('talent'); ?>				                
+				$talents = get_field('talent');
+                 ?>				                
                 <div class="player_item post<?php echo $post->ID; ?>">
                 	<label class="voice_title"><?php the_title(); ?> <em>by <?php foreach($talents as $talent){echo get_the_title($talent); } ?></em></label>
                 	<a href="<?php echo $voice_url; ?>" class="sc-player"></a>
@@ -195,21 +196,32 @@ get_header(); ?>
                          foreach($talents as $talent){
 							 	$talent_name = get_the_title($talent); ?>
                     <?php } } ?>
-            	<?php  if (in_array($post->ID, $current_user_id_array)) { ?>
+            	<script type="text/javascript">
+                jQuery(document).ready(function(){
+                if (jQuery.cookie('post_thumb')){
+                var obj_arr = JSON.parse(jQuery.cookie("post_thumb"));
+               var ids = [];
+                if (obj_arr.length>0){
+                for (var i =0 ; i<obj_arr.length; i++)
+                    ids.push(obj_arr[i].id);
+                }
+               if($.inArray('<?php echo $post->ID; ?>',ids)!== -1)
+                   {
+                    $("#add_item_<?php echo $post->ID; ?>").css("display","none");
+                    $("#remove_item_<?php echo $post->ID; ?>").css("display","block");
+                    $("#add_item_<?php echo $post->ID; ?>").parents('.voice_item').addClass('selected');
+                    }
+                }
+                    })
+                </script>
 
-<a id="add_item_<?php echo $post->ID; ?>" title="Add to My Selection" class="selection-button add-to-selection add icons" 
-rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*null_/*'.$talent_name.'_/*voice_/*'.get_permalink(10); ?>" style="display:none;"></a>
-<a id="remove_item_<?php echo $post->ID; ?>" title="Remove from My Selection" class="selection-button remove-from-selection add icons" 
-rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*null_/*'.$talent_name.'_/*voice_/*'.get_permalink(10); ?>" style="display:block;"></a>
-
-					<?php  } else{ ?>
                 
 <a id="add_item_<?php echo $post->ID; ?>" title="Add to My Selection" class="selection-button add-to-selection add icons" 
 rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*null_/*'.$talent_name.'_/*voice_/*'.get_permalink(10); ?>"></a>
 <a id="remove_item_<?php echo $post->ID; ?>" title="Remove from My Selection" class="selection-button remove-from-selection add icons" 
 rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*null_/*'.$talent_name.'_/*voice_/*'.get_permalink(10); ?>"></a>
 
-					<?php  } ?>
+					
                 </div>
                 <div class="play_btn"><a class="post<?php the_id(); ?>"></a></div>
                 <div class="voice_title">
@@ -336,14 +348,17 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
     });
 </script>
 	<script language="javascript">	
-	/*	<?php $voice_id = $_GET['v_id'];
+
+		<?php $voice_id = $_GET['v_id'];
+        echo 'idddd='.$_GET['page_id'];
 			if($voice_id){ ?>
+                
 			$(window).load(function () {
 				$('.player-container').slideDown(500);
 				$('.player_item').fadeOut();
 				$('.player_item.post' + <?php echo $voice_id; ?>).delay(500).fadeIn();		
 			});			
-	<?php } ?>*/
+	<?php } ?>
 						
         $(document).ready(function () {
 			
@@ -387,8 +402,11 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
                
                 }
             })
-              $('body').on('click','.selection_status',function(){
+              $('body').on('click','.selection-button.add-to-selection',function(){
                 $(this).parents('li').toggleClass('selected');
+            })
+              $('body').on('click','.selection-button.remove-from-selection',function(){
+                $(this).parents('li').removeClass('selected');
             })
             
         });

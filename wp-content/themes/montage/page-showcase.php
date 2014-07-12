@@ -24,6 +24,13 @@ get_header(); ?>
     <script type="text/javascript">
     $(document).ready(function() {
         $("select").selectOrDie();
+    $('.project-item').bind('inview', function(event, visible) {
+      if (visible) {
+        $(this).stop().animate({ opacity: 1 });
+      } else {
+        $(this).stop().animate({ opacity: 0 });
+      }
+    });
     })
     
     </script>

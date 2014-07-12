@@ -9,7 +9,8 @@ window.renderselected = function(obj){
 			$(".my-selection-container .inside .ul_inside li.no-items-found").fadeOut();
 					//jQuery(".my-selection-container .inside .ul_inside").append(data);		  
 					//$('.notifications-container').slideDown(500).delay(2000).slideUp(500);
-					//$('.notifications-container label').html('Item added to My Selection successfully.'); 
+					//$('.notifications-container label').html('Item added to My Selection successfully.');
+
 					
 					$('.my-selection-container .trigger').stop().animate({backgroundColor:'#77b900',color:"#ffffff"}, 300);
 			
@@ -17,7 +18,7 @@ window.renderselected = function(obj){
 						$(".my-selection-container #voices  .jspPane  .ul_inside")
 .prepend("<li id='item-"+obj.id+"' class='voice'><a class='permalink' href='"+obj.link+"?v_id="+obj.id+"'>"+obj.title+"</a><em>bysss </em> </li>");
 					}else{
-						$(".my-selection-container  #videos .jspPane  .ul_inside")
+					$(".my-selection-container  #videos .jspPane  .ul_inside")
 	.prepend("<li  id='item-"+obj.id+"' class='video'><a class='permalink' href='"+obj.link+"'><img src='"+obj.thumb+"' /><label>"+obj.title+"</label></a><a class='selection-button remove-from-selection icons' rel='_/*"+obj.id+"' title='Remove from My Selection'></a></li>");
 					}
 
@@ -74,7 +75,18 @@ jQuery(window).load(function ($) {
 			renderselected(postObj);
 			jQuery('.my-selection-container').animate({right:'0'}, 500);
 			
-
+			if(item_type == "voice"){
+				jQuery(".my-selection-container .tabs #voi").addClass('active');
+				jQuery(".my-selection-container .tabs #voe").removeClass('active');
+				jQuery(".my-selection-container .tabs #voices").addClass('active');
+				jQuery(".my-selection-container .tabs #videos").removeClass('active');
+				
+			}else{
+				jQuery(".my-selection-container .tabs #voe").addClass('active');
+				jQuery(".my-selection-container .tabs #voi").removeClass('active');
+				jQuery(".my-selection-container .tabs #videos").addClass('active');
+				jQuery(".my-selection-container .tabs #voices").removeClass('active');
+			}
 			
 			
 			
@@ -146,6 +158,8 @@ jQuery(window).load(function ($) {
 			jQuery('.my-selection-container #item-'+item_id).css('display','none');
 			jQuery('#remove_item_'+item_id).css({display:'none'});
 			jQuery('#add_item_'+item_id).css({display:'block'});
+
+
 			
 				/*jQuery.ajax({
 					type: 'GET',
