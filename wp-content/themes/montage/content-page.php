@@ -101,10 +101,10 @@ var marker = new google.maps.Marker({
           <input class="form-control" id="email" name="email" placeholder="Email address" type="text"><span class="glyphicon glyphicon-ok form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
-          <label class="control-label sr-only">your Massage</label>
+          <label class="control-label sr-only">your Message</label>
           <div class="input-group-addon">
           </div>
-          <textarea class="form-control text-area" placeholder="Your Massage"></textarea>
+          <textarea class="form-control text-area" placeholder="Your Message"></textarea>
           
         </div>
         <div class="form-group submit">

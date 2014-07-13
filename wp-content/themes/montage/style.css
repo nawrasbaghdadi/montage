@@ -647,7 +647,7 @@ section.montage-signature a img{border:0px;position:relative;top:5px;}
 }
 .latest-news{
 	position: fixed;
-	top: 175px;
+	top: 215px;
 	left: -400px;
 	width: 400px;
 	height: 400px;
@@ -691,7 +691,7 @@ section.montage-signature a img{border:0px;position:relative;top:5px;}
 .latest-news h1.page-title span{
 	color: #77b900;
 	text-decoration: none; 
-	background: #000 !important;
+	background: #252e33 !important;
 }
 .latest-news  h1.page-title.all-news a:hover span{
 	color: #fff;
@@ -728,10 +728,16 @@ section.montage-signature a img{border:0px;position:relative;top:5px;}
 	background: #252e33 !important;
 	color: #77b900 !important;
 }
+.not-show{
+	display: none !important;
+}
+.show{
+	display: block !important;
+}
 /******ShowCase****/
 #filter-form{
 	position: fixed;
-	top: 256px;
+	top: 267px;
 	left: 10px;
 	width: 200px;
 	height: 300px;
@@ -1047,7 +1053,7 @@ border-radius: 4px;
 	margin-top: 30px;
 }
 .sod_list{
-	height: 300px;
+	max-height: 300px !important;
 	overflow: scroll;
 }
 /*******Contact Us Page*******/	
@@ -1074,4 +1080,19 @@ border-radius: 4px;
 }
 .text-area{
 	height: 80px !important;
+}
+
+
+
+
+/*********Media Quire*********/
+@media (max-width : 1400px) {
+.sod_select{
+	width: 160px !important;
+}
+}
+@media (max-width : 900px) {
+.sod_select{
+	display: none !important;
+}
 }

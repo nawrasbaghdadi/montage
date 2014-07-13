@@ -8,7 +8,7 @@ window.renderselected = function(obj){
 			
 				if(obj.type=='voice'){
 						$(".my-selection-container #voices  .jspPane  .ul_inside")
-.prepend("<li id='item-"+obj.id+"' class='voice'><a class='permalink' href='"+obj.link+"?v_id="+obj.id+"'>"+obj.title+"</a><em>bysss </em> </li>");
+.prepend("<li id='item-"+obj.id+"' class='voice'><a class='permalink' href='"+obj.link+"?v_id="+obj.id+"'>"+obj.title+"</a><em>bysss </em> <a class='selection-button remove-from-selection icons' rel='_/*"+obj.id+"' title='Remove from My Selection'></a></li>");
 					}else{
 					$(".my-selection-container  #videos .jspPane  .ul_inside")
 	.prepend("<li  id='item-"+obj.id+"' class='video'><a class='permalink' href='"+obj.link+"'><img src='"+obj.thumb+"' /><label>"+obj.title+"</label></a><a class='selection-button remove-from-selection icons' rel='_/*"+obj.id+"' title='Remove from My Selection'></a></li>");
@@ -91,6 +91,7 @@ jQuery(window).load(function ($) {
 			jQuery('.my-selection-container #item-'+item_id).css('display','none');
 			jQuery('#remove_item_'+item_id).css({display:'none'});
 			jQuery('#add_item_'+item_id).css({display:'block'});
+			jQuery(('#add_item_'+item_id)).parents('li.voice_item').removeClass('selected');
 
 
 	});

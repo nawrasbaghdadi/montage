@@ -24,20 +24,15 @@ get_header(); ?>
     <script type="text/javascript">
     $(document).ready(function() {
         $("select").selectOrDie();
-    $('.project-item').bind('inview', function(event, visible) {
-      if (visible) {
-        $(this).stop().animate({ opacity: 1 });
-      } else {
-        $(this).stop().animate({ opacity: 0 });
-      }
-    });
+    
 //////////////////////////
+
     $('.subfilter').on('change',function(){
         var lis = [];
         //console.log($('#showcase-container').find('.isotope-hidden'));
         
         
-        $('#showcase-container li:animated').css('background','red');
+       // $('#showcase-container li:animated').css('background','red');
         $('#showcase-container li').each(function() {   
             //console.log($(this));
             if($(this).hasClass('isotope-hidden')){
@@ -236,22 +231,94 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
 </div>
 <div class="clear"></div>
 
-<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.isotope.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/src/isotope.pkgd.min.js"></script>
 <script>
     $(function () {
 		//$("ul#showcase-container>li:nth-child(3)").css({marginRight:'0'});
 
-        var $container = $('#showcase-container'),
-        filters = {};
-
+       // var $container = $('#showcase-container'),
+        var filters = {};
+/*
         $container.isotope({
             itemSelector: '.project-item',
             masonry: {
                 columnWidth: 3
-            }
+            },
+            animationOptions: {
+    duration: 4000,
+    easing: 'easeInOutQuad',
+    queue: false,
+    complete: iwannascroll
+    },
         });
+        $container.masonry( 'on', 'layoutComplete', function( isoInstance, laidOutItems ) {} )
+        function iwannascroll() {
+            console.log('done');
+        //var lis = [];
 
-       
+         //$('#showcase-container li').each(function() {   
+            //console.log($(this));
+             
+             //$("#showcase-container li.isotope-item").css("background-color","red");
+           //  var ss=$("#showcase-container li:not(.isotope-hidden)").attr("class");
+            // lis.push(ss);
+            // console.log(ss.length);
+
+           
+            //$(this).hasClass('.isotope-hidden');
+            // lis.push(this);
+            // console.log('ss');
+         
+           // });
+         //console.log(lis)
+}
+
+*/
+
+var $container = $('#showcase-container').isotope({
+    itemSelector: '.project-item',
+    masonry: {
+      columnWidth: 3
+    }, animationOptions: {
+    duration: 4000,
+    easing: 'easeInOutQuad',
+    queue: false
+    },
+  });
+
+  
+  var classArr = [];
+  $container.isotope( 'on', 'layoutComplete', function( isoInstance, laidOutItems ) {
+    //console.log( 'Isotope layout completed with ' + laidOutItems.length + ' items' );
+    for(i=0;i<laidOutItems.length;i++){
+        classArr.push($(laidOutItems[i].element).attr("class"));
+    }
+   // console.log($.inArray('showreel-2',classArr));
+    for (h=0;h<classArr.length;h++){
+        if (classArr[h].toLowerCase().indexOf("showreel-2") >= 0){
+            var classes=classArr[h].split(/\s+/);
+            for (c=0; c < $('.sod_list ul').length;c++)            
+                 $('.sod_list ul li').each(function(){
+                    var ele=$(this).data('value').replace('.','');
+                    if(ele > ""){
+                       if($.inArray(ele,classes)>-1){
+                        $(this).addClass('show');
+                        }else{
+                            $(this).addClass('not-show');
+                        }
+              }else{
+                console.log($(this).data('value').replace('.',''));
+                $(this).addClass('show');
+              }
+                });
+            
+        }
+        
+
+    }
+  });
+  
+  // $container.on( 'layoutComplete', onAnimationFinished );
         $('select').change(function () {
               
            
