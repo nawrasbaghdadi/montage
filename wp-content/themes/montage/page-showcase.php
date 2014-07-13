@@ -31,6 +31,26 @@ get_header(); ?>
         $(this).stop().animate({ opacity: 0 });
       }
     });
+//////////////////////////
+    $('.subfilter').on('change',function(){
+        var lis = [];
+        //console.log($('#showcase-container').find('.isotope-hidden'));
+        
+        
+        $('#showcase-container li:animated').css('background','red');
+        $('#showcase-container li').each(function() {   
+            //console.log($(this));
+            if($(this).hasClass('isotope-hidden')){
+              //  console.log('uess');
+            }
+            //$(this).hasClass('.isotope-hidden');
+            // lis.push(this);
+            // console.log('ss');
+         
+            });
+        
+    })        
+//////////////////////////
     })
     
     </script>
