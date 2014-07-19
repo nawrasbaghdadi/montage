@@ -21,15 +21,7 @@ get_header(); ?>
   
   <!-- Select Style -->
 <div class="wrapper relative clear showcase-page" style="min-height:340px;">
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("select").selectOrDie();
 
-     
-
-    })
-    
-    </script>
     <?php
      $category_list =array();
      $brand_list =array();
@@ -78,10 +70,10 @@ get_header(); ?>
         sort($client_list);
         sort($agency_list);
         ?>
-<div id="filter-form" >  
+<div id="filter-form" >
     <div class="preview" class="mainfilter">  
             <select data-custom-id="custom" data-custom-class="custom" data-filter-group="category" class="subfilter option-set clearfix cats" id="cats">
-                <option id="#all-categories" data-filter-value="" class="selected all" value="">All Categories</option>
+                <option id="#all-categories" data-filter-value="SHOW-ALL" class="selected all" value="">All Categories</option>
                 <?php   $get_showreel = get_category_by_slug('showreel'); ?>
                 <option value=".showreel" id="#showreel" data-filter-value=".showreel">Showreel</option>
                     <?php foreach($category_list as $category_item){
@@ -95,7 +87,7 @@ get_header(); ?>
     </div>
        <div class="preview">  
             <select data-custom-id="custom" data-custom-class="custom" data-filter-group="brand"  class="subfilter option-set clearfix" id="brands">
-                <option id="#all-brands" data-filter-value="" class="selected all" value="">All Brands</option>
+                <option id="#all-brands" data-filter-value="SHOW-ALL" class="selected all" value="">All Brands</option>
                     <?php foreach($brand_list as $brand_item){ ?>
                     <option value=".<?php  echo $brand_item; ?>" id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
                             <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></option>
@@ -104,7 +96,7 @@ get_header(); ?>
     </div>
     <div class="preview">   
             <select data-custom-id="custom" data-custom-class="custom" data-filter-group="client"  class="subfilter option-set clearfix" id="client">
-                <option id="#all-clients" data-filter-value="" class="selected all" value="">All Clients</option>
+                <option id="#all-clients" data-filter-value="SHOW-ALL" class="selected all" value="">All Clients</option>
                     <?php foreach($client_list as $client_item){ ?>
                      <option value=".<?php  echo $client_item; ?>" id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
                             <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></option>
@@ -113,7 +105,7 @@ get_header(); ?>
     </div>
     <div class="preview">  
             <select data-custom-id="custom" data-custom-class="custom" data-filter-group="agency"  class="subfilter option-set" id="agency">
-                <option id="#all-agencies" data-filter-value="" class="selected all" value="">All Agencies</option>
+                <option id="#all-agencies" data-filter-value="SHOW-ALL" class="selected all" value="">All Agencies</option>
                     <?php foreach($agency_list as $agency_item){ ?>
                      <option value=".<?php  echo $agency_item; ?>" id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
                             <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></option>
@@ -215,7 +207,9 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
 <script src="<?php echo get_template_directory_uri(); ?>/js/src/isotope.pkgd.min.js"></script>
 <script>
     $(function () {
-		
+       
+		$('.sod_list ul li').addClass('show');
+        
         var filters = {};
 
 var $container = $('#showcase-container').isotope({
@@ -230,52 +224,63 @@ var $container = $('#showcase-container').isotope({
   });
 
   
-  var classArr = [];
+  
   $container.isotope( 'on', 'layoutComplete', function( isoInstance, laidOutItems ) {
-    //console.log( 'Isotope layout completed with ' + laidOutItems.length + ' items' );
+    if($("[title='All Categories'] , [title='All Brands'] ,[title='All Clients'] ,[title='All Agencies']").hasClass('selected')){
+            $('.sod_list ul li').attr('class','');
+            $('.sod_list ul li').addClass('show');
+        }
+        
+        var classArr = [];
     for(i=0;i<laidOutItems.length;i++){
         classArr.push($(laidOutItems[i].element).attr("class"));
     }
-   // console.log($.inArray('showreel-2',classArr));
    
- //$('#cats , #brands, #client ,#agency').on('change',function (){ 
-
+   var classes = [];
     for (h=0;h<classArr.length;h++){
-        
-        var classes=classArr[h].split(/\s+/); 
-        
-
-                 $('.sod_list ul li').each(function(){
+         $.merge(classes,classArr[h].split(/\s+/));
+            }
+         var uniqueNames = [];
+$.each(classes, function(i, el){
+    if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+}); 
+               $('.sod_list ul li').each(function(){
+               
                     var ele=$(this).data('value').replace('.','');
-                    if ($.inArray(ele,classes)>-1){
+                    
+                  if(ele!='.' || ele!=""){
+                    if ($.inArray(ele,uniqueNames)<=0){
+                      $(this).attr('class','');
+                        $(this).addClass('not-show');
+
                         
-                        $(this).addClass('show');
-                        }else{
-                          
-                            $(this).addClass('not-show');
-                        }
+                    }
+                }
                 });
 
-                  
+             
             
         
 
        
 
-    }
-//})
+   
     
   });
   
   // $container.on( 'layoutComplete', onAnimationFinished );
         $('select').change(function () {
-              
            
-           
-                var vall = $(this).val();
+           // console.log('rest');  , "[title='All Brands']" , "[title='All Clients']" , "[title='All Clients']"
 
-                $('select').find("option").removeClass('selected');
-                var ss=$(this).find("option[value='"+vall+"']").addClass('selected');
+        
+        
+           
+                //var vall = $(this).val();
+
+
+                //$('select').find("option").removeClass('selected');
+                //var ss=$(this).find("option[value='"+vall+"']").addClass('selected');
 
                 
             // don't proceed if already selected
@@ -308,6 +313,9 @@ var $container = $('#showcase-container').isotope({
             return false;
         });
 
+$("select").selectOrDie();
+
+     
     });
 </script>
 	<script language="javascript">	
