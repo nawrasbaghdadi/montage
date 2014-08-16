@@ -271,17 +271,6 @@ $.each(classes, function(i, el){
   // $container.on( 'layoutComplete', onAnimationFinished );
         $('select').change(function () {
            
-           // console.log('rest');  , "[title='All Brands']" , "[title='All Clients']" , "[title='All Clients']"
-
-        
-        
-           
-                //var vall = $(this).val();
-
-
-                //$('select').find("option").removeClass('selected');
-                //var ss=$(this).find("option[value='"+vall+"']").addClass('selected');
-
                 
             // don't proceed if already selected
             if ($(this).hasClass('selected')) {
