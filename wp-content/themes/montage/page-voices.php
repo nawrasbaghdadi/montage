@@ -71,62 +71,56 @@ get_header(); ?>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/soundcloud.player.api.js"></script>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/sc-player.js"></script>
     <div class="clear space10"></div>
-       <div id="filter-form" >  
-    <div class="preview" class="mainfilter">  
-            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="language" class="subfilter option-set clearfix cats ">
-                <option id="#all-languages" data-filter-value="" class="selected all" value="">All Languages</option>
-                    <?php 
-                 $languages = get_terms("language");
-                 $lang_count = count($languages);
-                 if ( $lang_count > 0 ){
-                     foreach ( $languages as $language) {?>
-                <option id="#<?php  echo $language->slug; ?>" data-filter-value=".<?php  echo $language->slug; ?>" value=".<?php  echo $language->slug; ?>" >
-                        <?php echo $language->name;?></option>
-                <?php } } ?>
-               
-            </select>
-    </div>
-       <div class="preview">  
-            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="accent"  class="subfilter option-set clearfix">
-                <option id="#all-accents" data-filter-value="" class="selected all" value="">All Accents</option>
-                           <?php 
-                 $accents = get_terms("accent");
-                 $accent_count = count($accents);
-                 if ( $accent_count > 0 ){
-                     foreach ( $accents as $accent) {?>
-                <option  id="#<?php  echo $accent->slug; ?>" data-filter-value=".<?php  echo $accent->slug; ?>" value=".<?php  echo $accent->slug; ?>">
-                        <?php echo $accent->name;?></option>
-                <?php } } ?>
-            </select>
-    </div>
-    <div class="preview">   
-            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="gender"  class="subfilter option-set clearfix">
-                <option id="#all-genders" data-filter-value="" class="selected all" value="">All Genders</option>
-                  <?php 
-                 $genders = get_terms("voice_gender");
-                 $gender_count = count($genders);
-                 if ( $gender_count > 0 ){
-                     foreach ( $genders as $gender) {?>
-                <option id="#<?php  echo $gender->slug; ?>" data-filter-value=".<?php  echo $gender->slug; ?>" value=".<?php  echo $gender->slug; ?>"> 
-                        <?php echo $gender->name; ?></option>
-                <?php } } ?>
-            </select>
-    </div>
-    <div class="preview">  
-            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="agency"  class="subfilter option-set">
-                <option id="#all-brackets" data-filter-value="" class="selected all" value="">All Age Brackets</option>
-                    <?php 
-                 $brackets = get_terms("age_bracket");
-                 $bracket_count = count($brackets);
-                 if ( $bracket_count > 0 ){
-                     foreach ( $brackets as $bracket) {?>
-                <option id="#<?php  echo $bracket->slug; ?>" data-filter-value=".<?php  echo $bracket->slug; ?>" value=".<?php  echo $bracket->slug; ?>">
-                        <?php echo $bracket->name; ?></option>
-                <?php } } ?>
-            </select>
-    </div>
-      
-</div>
+     <ul class="mainfilter">
+        <li><label>All Categories</label><span class="icons"></span>
+            <div class="col-list">
+                <ul class="subfilter option-set clearfix cats" data-filter-group="category"> 
+                    <?php   $get_showreel = get_category_by_slug('showreel'); ?>
+                    <li><a id="#showreel" data-filter-value=".showreel">
+                            Showreel</a></li>
+                    <?php foreach($category_list as $category_item){
+                            if ($category_item != 'showreel'){ ?>
+                        <li><a id="#<?php  echo $category_item; ?>" data-filter-value=".<?php  echo $category_item; ?>">
+                                <?php $term = get_term_by('slug', $category_item, 'category'); $cat_name = $term->name; echo $cat_name;?></a></li>
+                    <?php } } ?>
+                </ul>
+                <a id="#all-categories" data-filter-value="" class="selected all">All Categories</a>
+            </div>
+        </li>
+        <li><label>All Brands</label><span class="icons"></span>
+            <div class="col-list">
+                <ul class="subfilter option-set clearfix " data-filter-group="brand"> 
+                    <?php foreach($brand_list as $brand_item){ ?>
+                        <li><a id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
+                                <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></a></li>
+                    <?php } ?>
+                </ul>
+            <a id="#all-brands" data-filter-value="" class="selected all">All Brands</a>
+            </div>
+        </li>
+        <li><label>All Clients</label><span class="icons"></span>
+            <div class="col-list">
+                <ul class="subfilter option-set clearfix " data-filter-group="client"> 
+                    <?php foreach($client_list as $client_item){ ?>
+                        <li><a id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
+                                <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></a></li>
+                    <?php } ?>
+                </ul>
+                <a id="#all-clients" data-filter-value="" class="selected all">All Clients</a>
+            </div>
+        </li>
+        <li><label>All Agencies</label><span class="icons"></span>
+            <div class="col-list">
+                <ul class="subfilter option-set clearfix " data-filter-group="agency"> 
+                    <?php foreach($agency_list as $agency_item){ ?>
+                        <li><a id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
+                                <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></a></li>
+                    <?php } ?>
+                </ul>
+                <a id="#all-agencies" data-filter-value="" class="selected all">All Agencies</a>
+            </div>
+        </li>
+    </ul>
     <div class="clear space25"></div>
     <div class="voice_list_header">
         <div class="selection_status">&nbsp;</div>
