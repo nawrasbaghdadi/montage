@@ -71,6 +71,45 @@ get_header(); ?>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/soundcloud.player.api.js"></script>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/sc-player.js"></script>
     <div class="clear space10"></div>
+    <?php
+     $category_list =array();
+     $brand_list =array();
+     $client_list =array();
+     $agency_list =array();
+     $showcase_items = new WP_Query( array('meta_key'=>'add_as_showcase',
+                                            'meta_value' => '1',
+                                            'meta_compare' => '==',
+                                            'order' => 'DESC') );
+        while ($showcase_items->have_posts()) : $showcase_items->the_post();
+            $categorylist = get_the_category();     
+            $brandlist = get_field('brands');       
+            $clientlist = get_field('client');      
+            $agencylist = get_field('agency');      
+        
+            foreach($categorylist as $category){
+                $category_list[] = $category->slug;}
+                
+            foreach($brandlist as $brand){
+                $brand_list[] = $brand->post_name;}
+            
+            foreach($clientlist as $client){
+                $client_list[] = $client->post_name;}
+            
+            foreach($agencylist as $agency){
+                $agency_list[] = $agency->post_name;}
+      
+       endwhile;
+       // print_r($category_list); 
+       // print_r($brand_list); 
+        $category_list = array_unique($category_list);
+        $brand_list = array_unique($brand_list);
+        $client_list = array_unique($client_list);
+        $agency_list = array_unique($agency_list);
+        sort($category_list);
+        sort($brand_list);
+        sort($client_list);
+        sort($agency_list);
+        ?>
      <ul class="mainfilter">
         <li><label>All Categories</label><span class="icons"></span>
             <div class="col-list">
