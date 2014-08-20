@@ -70,50 +70,56 @@ get_header(); ?>
         sort($client_list);
         sort($agency_list);
         ?>
-<div id="filter-form" >
-    <div class="preview" class="mainfilter">  
-            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="category" class="subfilter option-set clearfix cats" id="cats">
-                <option id="#all-categories" data-filter-value="SHOW-ALL" class="selected all" value="">All Categories</option>
-                <?php   $get_showreel = get_category_by_slug('showreel'); ?>
-                <option value=".showreel" id="#showreel" data-filter-value=".showreel">Showreel</option>
+  <ul class="mainfilter">
+        <li><label>All Categories</label><span class="icons"></span>
+            <div class="col-list">
+                <ul class="subfilter option-set clearfix cats" data-filter-group="category"> 
+                    <?php   $get_showreel = get_category_by_slug('showreel'); ?>
+                    <li><a id="#showreel" data-filter-value=".showreel">
+                            Showreel</a></li>
                     <?php foreach($category_list as $category_item){
-
-                        if ($category_item != 'showreel'){ ?>
-                    <option value=".<?php  echo $category_item; ?>" id="#<?php  echo $category_item; ?>" data-filter-value=".<?php  echo $category_item; ?>">
-                            <?php $term = get_term_by('slug', $category_item, 'category'); $cat_name = $term->name; echo $cat_name;?></option>
-                <?php } } ?>
-               
-            </select>
-    </div>
-       <div class="preview">  
-            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="brand"  class="subfilter option-set clearfix" id="brands">
-                <option id="#all-brands" data-filter-value="SHOW-ALL" class="selected all" value="">All Brands</option>
+                            if ($category_item != 'showreel'){ ?>
+                        <li><a id="#<?php  echo $category_item; ?>" data-filter-value=".<?php  echo $category_item; ?>">
+                                <?php $term = get_term_by('slug', $category_item, 'category'); $cat_name = $term->name; echo $cat_name;?></a></li>
+                    <?php } } ?>
+                </ul>
+                <a id="#all-categories" data-filter-value="" class="selected all">All Categories</a>
+            </div>
+        </li>
+        <li><label>All Brands</label><span class="icons"></span>
+            <div class="col-list">
+                <ul class="subfilter option-set clearfix " data-filter-group="brand"> 
                     <?php foreach($brand_list as $brand_item){ ?>
-                    <option value=".<?php  echo $brand_item; ?>" id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
-                            <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></option>
-                <?php } ?>
-            </select>
-    </div>
-    <div class="preview">   
-            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="client"  class="subfilter option-set clearfix" id="client">
-                <option id="#all-clients" data-filter-value="SHOW-ALL" class="selected all" value="">All Clients</option>
+                        <li><a id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
+                                <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></a></li>
+                    <?php } ?>
+                </ul>
+            <a id="#all-brands" data-filter-value="" class="selected all">All Brands</a>
+            </div>
+        </li>
+        <li><label>All Clients</label><span class="icons"></span>
+            <div class="col-list">
+                <ul class="subfilter option-set clearfix " data-filter-group="client"> 
                     <?php foreach($client_list as $client_item){ ?>
-                     <option value=".<?php  echo $client_item; ?>" id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
-                            <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></option>
-                <?php } ?>
-            </select>
-    </div>
-    <div class="preview">  
-            <select data-custom-id="custom" data-custom-class="custom" data-filter-group="agency"  class="subfilter option-set" id="agency">
-                <option id="#all-agencies" data-filter-value="SHOW-ALL" class="selected all" value="">All Agencies</option>
+                        <li><a id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
+                                <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></a></li>
+                    <?php } ?>
+                </ul>
+                <a id="#all-clients" data-filter-value="" class="selected all">All Clients</a>
+            </div>
+        </li>
+        <li><label>All Agencies</label><span class="icons"></span>
+            <div class="col-list">
+                <ul class="subfilter option-set clearfix " data-filter-group="agency"> 
                     <?php foreach($agency_list as $agency_item){ ?>
-                     <option value=".<?php  echo $agency_item; ?>" id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
-                            <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></option>
-                <?php } ?>
-            </select>
-    </div>
-      
-</div>
+                        <li><a id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
+                                <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></a></li>
+                    <?php } ?>
+                </ul>
+                <a id="#all-agencies" data-filter-value="" class="selected all">All Agencies</a>
+            </div>
+        </li>
+    </ul>
 
 
 	<?php while ( have_posts() ) : the_post(); ?>
