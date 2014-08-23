@@ -59,7 +59,7 @@ get_header(); ?>
                             if ($category_item != 'showreel'){ ?>
                         <li><a id="#<?php  echo $category_item; ?>" data-filter-value=".<?php  echo $category_item; ?>">
                                 <?php $term = get_term_by('slug', $category_item, 'category'); $cat_name = $term->name; echo $cat_name;?></a></li>
-                    <? } } ?>
+                    <?php } } ?>
                 </ul>
                 <a id="#all-categories" data-filter-value="" class="selected all">All Categories</a>
             </div>
@@ -70,7 +70,7 @@ get_header(); ?>
                     <?php foreach($brand_list as $brand_item){ ?>
                         <li><a id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
                                 <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></a></li>
-                    <? } ?>
+                    <?php } ?>
                 </ul>
             <a id="#all-brands" data-filter-value="" class="selected all">All Brands</a>
             </div>
@@ -81,7 +81,7 @@ get_header(); ?>
                     <?php foreach($client_list as $client_item){ ?>
                         <li><a id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
                                 <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></a></li>
-                    <? } ?>
+                    <?php } ?>
                 </ul>
                 <a id="#all-clients" data-filter-value="" class="selected all">All Clients</a>
             </div>
@@ -92,7 +92,7 @@ get_header(); ?>
                     <?php foreach($agency_list as $agency_item){ ?>
                         <li><a id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
                                 <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></a></li>
-                    <? } ?>
+                    <?php } ?>
                 </ul>
                 <a id="#all-agencies" data-filter-value="" class="selected all">All Agencies</a>
             </div>

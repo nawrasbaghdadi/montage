@@ -157,7 +157,14 @@ textarea{outline:none;}
 .sitecontent{background-color:#ffffff;padding:15px 0px 0 0px;min-width:1000px;}
 
 
-.sitecontent h1.page-title{height:39px;padding:0px;margin:0px 0px 20px 0px;position: relative;border-bottom:1px solid #77b900;text-transform:uppercase;}
+.sitecontent h1.page-title{height: 39px;
+padding: 0px;
+margin: 10px 0px 20px 0px;
+ position: relative; 
+border-bottom: 1px solid #77b900;
+text-transform: uppercase;
+width: 100%;
+}
 .sitecontent h1.page-title.normalcase{text-transform:none;}
 .sitecontent h1.page-title span{display:inline-block;height:40px;background-color:#ffffff;line-height:56px;padding:0px 10px 0px 0px;font-weight:normal;font-size:30px;
     /* Shadows are visible under slightly transparent text color */
@@ -637,9 +644,6 @@ section.montage-signature a img{border:0px;position:relative;top:5px;}
 	padding-left: 16px;
 	font-weight: bold;
 }*/
-.page-title{
-	text-align: center;
-}
 .sitecontent h1.page-title .title:before, .sitecontent h1.page-title .title:after{
 	xcolor: #fff !important;
 	xcontent: '' !important;

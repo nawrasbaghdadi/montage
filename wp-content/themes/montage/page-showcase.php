@@ -15,11 +15,30 @@
 error_reporting(E_ALL & ~E_NOTICE);
 
 get_header(); ?>
+ <script type="text/javascript" src="http://montage-me.com/wp-content/themes/montage/js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" id="sourcecode">
+            $(function()
+            {
+                $('.mainfilter-scroll').jScrollPane(
+                    {
+                        verticalDragMinHeight: 30,
+                        verticalDragMaxHeight: 30,
+                        autoReinitialise: true,
+                        hideFocus: true
+                    }
+                );
+                
+                $('.inside_list').jScrollPane(
+                    {
+                        verticalDragMinHeight: 30,
+                        verticalDragMaxHeight: 30,
+                        autoReinitialise: true,
+                        hideFocus: true
+                    }
+                );
+            });
+        </script>
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/isotope.css" />
-    <!-- Select Style -->
-    
-  
-  <!-- Select Style -->
 <div class="wrapper relative clear showcase-page" style="min-height:340px;">
 
     <?php
@@ -70,10 +89,11 @@ get_header(); ?>
         sort($client_list);
         sort($agency_list);
         ?>
+       
   <ul class="mainfilter">
         <li><label>All Categories</label><span class="icons"></span>
-            <div class="col-list">
                 <ul class="subfilter option-set clearfix cats" data-filter-group="category"> 
+                     <li><a id="#all-categories" data-filter-value="" class="selected all">All Categories</a></li>
                     <?php   $get_showreel = get_category_by_slug('showreel'); ?>
                     <li><a id="#showreel" data-filter-value=".showreel">
                             Showreel</a></li>
@@ -83,41 +103,41 @@ get_header(); ?>
                                 <?php $term = get_term_by('slug', $category_item, 'category'); $cat_name = $term->name; echo $cat_name;?></a></li>
                     <?php } } ?>
                 </ul>
-                <a id="#all-categories" data-filter-value="" class="selected all">All Categories</a>
-            </div>
+               
+            
         </li>
         <li><label>All Brands</label><span class="icons"></span>
-            <div class="col-list">
-                <ul class="subfilter option-set clearfix " data-filter-group="brand"> 
+                <ul class="subfilter option-set clearfix " data-filter-group="brand" > 
+                    <li><a id="#all-brands" data-filter-value="" class="selected all">All Brands</a></li>
+                    <div class="mainfilter-scroll" style="height:315px;margin-bottom: 5px;z-index: 99999 !important;"> 
                     <?php foreach($brand_list as $brand_item){ ?>
                         <li><a id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
                                 <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></a></li>
                     <?php } ?>
+                </div>
                 </ul>
-            <a id="#all-brands" data-filter-value="" class="selected all">All Brands</a>
-            </div>
         </li>
         <li><label>All Clients</label><span class="icons"></span>
-            <div class="col-list">
+            
                 <ul class="subfilter option-set clearfix " data-filter-group="client"> 
+                     <li><a id="#all-clients" data-filter-value="" class="selected all">All Clients</a></li>
                     <?php foreach($client_list as $client_item){ ?>
                         <li><a id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
                                 <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></a></li>
                     <?php } ?>
                 </ul>
-                <a id="#all-clients" data-filter-value="" class="selected all">All Clients</a>
-            </div>
+               
         </li>
         <li><label>All Agencies</label><span class="icons"></span>
-            <div class="col-list">
                 <ul class="subfilter option-set clearfix " data-filter-group="agency"> 
+                    <li><a id="#all-agencies" data-filter-value="" class="selected all">All Agencies</a></li>
+                    <div class="mainfilter-scroll" style="height:315px;margin-bottom: 5px;z-index: 99999 !important;"> 
                     <?php foreach($agency_list as $agency_item){ ?>
                         <li><a id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
                                 <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></a></li>
                     <?php } ?>
+                </div>
                 </ul>
-                <a id="#all-agencies" data-filter-value="" class="selected all">All Agencies</a>
-            </div>
         </li>
     </ul>
 
@@ -212,9 +232,51 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/src/isotope.pkgd.min.js"></script>
 <script>
+$(function () {
+        //$("ul#showcase-container>li:nth-child(3)").css({marginRight:'0'});
+
+        var $container = $('#showcase-container'),
+        filters = {};
+
+        $container.isotope({
+            itemSelector: '.project-item',
+            masonry: {
+                columnWidth: 3
+            }
+        });
+
+        // filter buttons
+        $('.subfilter a').click(function () {
+            var $this = $(this);
+            // don't proceed if already selected
+            if ($this.hasClass('selected')) {
+                return;
+            }
+
+            var $optionSet = $this.parents('.option-set');
+            // change selected class
+            $optionSet.find('.selected').removeClass('selected');
+            $this.addClass('selected');
+
+            // store filter value in object
+            // i.e. filters.color = 'red'
+            var group = $optionSet.attr('data-filter-group');
+            filters[group] = $this.attr('data-filter-value');
+            // convert object into array
+            var isoFilters = [];
+            for (var prop in filters) {
+                isoFilters.push(filters[prop])
+            }
+            var selector = isoFilters.join('');
+            $container.isotope({ filter: selector });
+
+            return false;
+        });
+
+    });
     $(function () {
        
-		$('.sod_list ul li').addClass('show');
+		$('.subfilter li a').addClass('show');
         
         var filters = {};
 
@@ -232,9 +294,12 @@ var $container = $('#showcase-container').isotope({
   
   
   $container.isotope( 'on', 'layoutComplete', function( isoInstance, laidOutItems ) {
-    if($("[title='All Categories'] , [title='All Brands'] ,[title='All Clients'] ,[title='All Agencies']").hasClass('selected')){
-            $('.sod_list ul li').attr('class','');
-            $('.sod_list ul li').addClass('show');
+    $('.subfilter li a').addClass('show');
+    //console.log('layoutComplete');
+    //[data-filter-value='category'].[data-filter-value='brands'],[data-filter-value='clients'],[data-filter-value='agency']
+    if($("a.all").hasClass('selected')){
+            $('.subfilter li a').attr('class','');
+            $('.subfilter li a').addClass('show');
         }
         
         var classArr = [];
@@ -250,17 +315,20 @@ var $container = $('#showcase-container').isotope({
 $.each(classes, function(i, el){
     if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
 }); 
-               $('.sod_list ul li').each(function(){
+               $('.subfilter li a').each(function(){
                
-                    var ele=$(this).data('value').replace('.','');
+                    var ele=$(this).attr('data-filter-value').replace('.','');
                     
                   if(ele!='.' || ele!=""){
                     if ($.inArray(ele,uniqueNames)<=0){
                       $(this).attr('class','');
                         $(this).addClass('not-show');
+                       // $("[data-filter-value='category']").addClass('show');
 
                         
                     }
+                }else{
+                    uniqueNames='';
                 }
                 });
 
@@ -308,7 +376,7 @@ $.each(classes, function(i, el){
             return false;
         });
 
-$("select").selectOrDie();
+//$("select").selectOrDie();
 
      
     });
