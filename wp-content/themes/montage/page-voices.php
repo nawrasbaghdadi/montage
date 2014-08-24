@@ -45,12 +45,6 @@ get_header(); ?>
   transition-delay: 0s, 0.8s, 0s;
 }
 </style>
-  <script type="text/javascript">
-    $(document).ready(function() {
-        $("select").selectOrDie();
-    })
-    
-    </script>
 <div class="wrapper relative clear voices-page" style="min-height:340px;">
 
  
@@ -71,93 +65,58 @@ get_header(); ?>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/soundcloud.player.api.js"></script>
     <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/sc-player.js"></script>
     <div class="clear space10"></div>
-    <?php
-     $category_list =array();
-     $brand_list =array();
-     $client_list =array();
-     $agency_list =array();
-     $showcase_items = new WP_Query( array('meta_key'=>'add_as_showcase',
-                                            'meta_value' => '1',
-                                            'meta_compare' => '==',
-                                            'order' => 'DESC') );
-        while ($showcase_items->have_posts()) : $showcase_items->the_post();
-            $categorylist = get_the_category();     
-            $brandlist = get_field('brands');       
-            $clientlist = get_field('client');      
-            $agencylist = get_field('agency');      
-        
-            foreach($categorylist as $category){
-                $category_list[] = $category->slug;}
-                
-            foreach($brandlist as $brand){
-                $brand_list[] = $brand->post_name;}
-            
-            foreach($clientlist as $client){
-                $client_list[] = $client->post_name;}
-            
-            foreach($agencylist as $agency){
-                $agency_list[] = $agency->post_name;}
-      
-       endwhile;
-       // print_r($category_list); 
-       // print_r($brand_list); 
-        $category_list = array_unique($category_list);
-        $brand_list = array_unique($brand_list);
-        $client_list = array_unique($client_list);
-        $agency_list = array_unique($agency_list);
-        sort($category_list);
-        sort($brand_list);
-        sort($client_list);
-        sort($agency_list);
-        ?>
      <ul class="mainfilter">
-        <li><label>All Categories</label><span class="icons"></span>
-            <div class="col-list">
-                <ul class="subfilter option-set clearfix cats" data-filter-group="category"> 
-                    <?php   $get_showreel = get_category_by_slug('showreel'); ?>
-                    <li><a id="#showreel" data-filter-value=".showreel">
-                            Showreel</a></li>
-                    <?php foreach($category_list as $category_item){
-                            if ($category_item != 'showreel'){ ?>
-                        <li><a id="#<?php  echo $category_item; ?>" data-filter-value=".<?php  echo $category_item; ?>">
-                                <?php $term = get_term_by('slug', $category_item, 'category'); $cat_name = $term->name; echo $cat_name;?></a></li>
-                    <?php } } ?>
-                </ul>
-                <a id="#all-categories" data-filter-value="" class="selected all">All Categories</a>
-            </div>
+        <li><label>All Languages</label><span class="icons"></span>
+            <ul class="subfilter option-set clearfix" data-filter-group="language">
+                <li><a id="#all-languages" data-filter-value="" class="selected all">All Languages</a></li>
+                <?php 
+                 $languages = get_terms("language");
+                 $lang_count = count($languages);
+                 if ( $lang_count > 0 ){
+                     foreach ( $languages as $language) {?>
+                <li><a id="#<?php  echo $language->slug; ?>" data-filter-value=".<?php  echo $language->slug; ?>">
+                        <?php echo $language->name;?></a></li>
+                <?php } } ?>
+            </ul>
         </li>
-        <li><label>All Brands</label><span class="icons"></span>
-            <div class="col-list">
-                <ul class="subfilter option-set clearfix " data-filter-group="brand"> 
-                    <?php foreach($brand_list as $brand_item){ ?>
-                        <li><a id="#<?php  echo $brand_item; ?>" data-filter-value=".<?php  echo $brand_item; ?>">
-                                <?php $brand_id = get_id_by_post_name($brand_item); echo get_the_title($brand_id); ?></a></li>
-                    <?php } ?>
-                </ul>
-            <a id="#all-brands" data-filter-value="" class="selected all">All Brands</a>
-            </div>
+        <li><label>All Accents</label><span class="icons"></span>
+            <ul class="subfilter option-set clearfix " data-filter-group="accent"> 
+                <li><a id="#all-accents" data-filter-value="" class="selected all">All Accents</a></li>
+                <?php 
+                 $accents = get_terms("accent");
+                 $accent_count = count($accents);
+                 if ( $accent_count > 0 ){
+                     foreach ( $accents as $accent) {?>
+                <li><a id="#<?php  echo $accent->slug; ?>" data-filter-value=".<?php  echo $accent->slug; ?>">
+                        <?php echo $accent->name;?></a></li>
+                <?php } } ?>
+            </ul>
         </li>
-        <li><label>All Clients</label><span class="icons"></span>
-            <div class="col-list">
-                <ul class="subfilter option-set clearfix " data-filter-group="client"> 
-                    <?php foreach($client_list as $client_item){ ?>
-                        <li><a id="#<?php  echo $client_item; ?>" data-filter-value=".<?php  echo $client_item; ?>">
-                                <?php $client_id = get_id_by_post_name($client_item); echo get_the_title($client_id); ?></a></li>
-                    <?php } ?>
-                </ul>
-                <a id="#all-clients" data-filter-value="" class="selected all">All Clients</a>
-            </div>
+        <li><label>All Genders</label><span class="icons"></span>
+            <ul class="subfilter option-set clearfix " data-filter-group="gender"> 
+                <li><a id="#all-genders" data-filter-value="" class="selected all">All Genders</a></li>
+                <?php 
+                 $genders = get_terms("voice_gender");
+                 $gender_count = count($genders);
+                 if ( $gender_count > 0 ){
+                     foreach ( $genders as $gender) {?>
+                <li><a id="#<?php  echo $gender->slug; ?>" data-filter-value=".<?php  echo $gender->slug; ?>">
+                        <?php echo $gender->name; ?></a></li>
+                <?php } } ?>
+            </ul>
         </li>
-        <li><label>All Agencies</label><span class="icons"></span>
-            <div class="col-list">
-                <ul class="subfilter option-set clearfix " data-filter-group="agency"> 
-                    <?php foreach($agency_list as $agency_item){ ?>
-                        <li><a id="#<?php  echo $agency_item; ?>" data-filter-value=".<?php  echo $agency_item; ?>">
-                                <?php $agency_id = get_id_by_post_name($agency_item); echo get_the_title($agency_id); ?></a></li>
-                    <?php } ?>
-                </ul>
-                <a id="#all-agencies" data-filter-value="" class="selected all">All Agencies</a>
-            </div>
+        <li><label>All Age Brackets</label><span class="icons"></span>
+            <ul class="subfilter option-set clearfix " data-filter-group="agency"> 
+                <li><a id="#all-brackets" data-filter-value="" class="selected all">All Age Brackets</a></li>
+                <?php 
+                 $brackets = get_terms("age_bracket");
+                 $bracket_count = count($brackets);
+                 if ( $bracket_count > 0 ){
+                     foreach ( $brackets as $bracket) {?>
+                <li><a id="#<?php  echo $bracket->slug; ?>" data-filter-value=".<?php  echo $bracket->slug; ?>">
+                        <?php echo $bracket->name; ?></a></li>
+                <?php } } ?>
+            </ul>
         </li>
     </ul>
     <div class="clear space25"></div>
@@ -324,7 +283,7 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
                 </ul>
     <div class="clear space25"></div>
     
-<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.isotope.min.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/src/isotope.pkgd.min.js"></script>
 <script>
     $(function () {
 
@@ -336,18 +295,112 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
             masonry: {
                 columnWidth: 3
             },
-  			transformsEnabled: false
+            transformsEnabled: false
 
         });
-              $('select').change(function () {
-              
-           
-           
-                var vall = $(this).val();
 
-                $('select').find("option").removeClass('selected');
-                var ss=$(this).find("option[value='"+vall+"']").addClass('selected');
+        // filter buttons
+        $('.subfilter a').click(function () {
+            var $this = $(this);
+            // don't proceed if already selected
+            if ($this.hasClass('selected')) {
+                return;
+            }
 
+            var $optionSet = $this.parents('.option-set');
+            // change selected class
+            $optionSet.find('.selected').removeClass('selected');
+            $this.addClass('selected');
+
+            // store filter value in object
+            // i.e. filters.color = 'red'
+            var group = $optionSet.attr('data-filter-group');
+            filters[group] = $this.attr('data-filter-value');
+            // convert object into array
+            var isoFilters = [];
+            for (var prop in filters) {
+                isoFilters.push(filters[prop])
+            }
+            var selector = isoFilters.join('');
+            $container.isotope({ filter: selector });
+
+            return false;
+        });
+
+    });
+  $(function () {
+       
+        $('.subfilter li a').addClass('show');
+        
+        var filters = {};
+
+var $container = $('#voice_list').isotope({
+    itemSelector: '.project-item',
+    masonry: {
+      columnWidth: 3
+    }, animationOptions: {
+    duration: 4000,
+    easing: 'easeInOutQuad',
+    queue: false
+    },
+  });
+
+  
+  
+  $container.isotope( 'on', 'layoutComplete', function( isoInstance, laidOutItems ) {
+    $('.subfilter li a').addClass('show');
+    //[data-filter-value='category'].[data-filter-value='brands'],[data-filter-value='clients'],[data-filter-value='agency']
+    if($("a.all").hasClass('selected')){
+            $('.subfilter li a').attr('class','');
+            $('.subfilter li a').addClass('show');
+        }
+        
+        var classArr = [];
+    for(i=0;i<laidOutItems.length;i++){
+        classArr.push($(laidOutItems[i].element).attr("class"));
+    }
+   
+   var classes = [];
+    for (h=0;h<classArr.length;h++){
+         $.merge(classes,classArr[h].split(/\s+/));
+            }
+         var uniqueNames = [];
+$.each(classes, function(i, el){
+    if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+}); 
+               $('.subfilter li a').each(function(){
+               
+                    var ele=$(this).attr('data-filter-value').replace('.','');
+                    
+                  if(ele!='.' || ele!=""){
+
+                    if ($.inArray(ele,uniqueNames)<=0){
+                         $(this).attr('class','');
+                        $(this).addClass('not-show');
+
+                        
+                    }
+             
+                }else{
+                    uniqueNames='';
+                    console.log('all');
+                    //$('.subfilter li a').addClass('show');  
+                }
+                });
+
+             
+            
+        
+
+       
+
+   
+    
+  });
+  
+  // $container.on( 'layoutComplete', onAnimationFinished );
+        $('select').change(function () {
+           
                 
             // don't proceed if already selected
             if ($(this).hasClass('selected')) {
@@ -369,16 +422,21 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
             // convert object into array
             var isoFilters = [];
             for (var prop in filters) {
+              
                 isoFilters.push(filters[prop])
             }
             var selector = isoFilters.join('');
+           
             $container.isotope({ filter: selector });
 
             return false;
         });
-        // filter buttons
 
+//$("select").selectOrDie();
+
+     
     });
+
 </script>
 	<script language="javascript">	
 
