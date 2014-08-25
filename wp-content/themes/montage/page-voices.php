@@ -123,10 +123,6 @@ get_header(); ?>
     <div class="voice_list_header">
         <div class="selection_status">&nbsp;</div>
         <div class="play_btn">&nbsp;</div>
-        <div class="voice_title">
-            <a id="sort_name_asc" class="up">Voice Title<span class="icons"></span></a>
-            <a id="sort_name_desc" class="down">Voice Title<span class="icons"></span></a>
-        </div>
         <div class="talent_name">
             <a id="sort_price_asc" class="up">Talent Name<span class="icons"></span></a>
             <a id="sort_price_desc" class="down">Talent Name<span class="icons"></span></a>
@@ -216,9 +212,6 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
 					
                 </div>
                 <div class="play_btn"><a class="post<?php the_id(); ?>"></a></div>
-                <div class="voice_title">
-					<?php the_title(); ?>
-                </div>
                 <div class="talent_name filterable">
 					<?php if($talents){
                          foreach($talents as $talent){

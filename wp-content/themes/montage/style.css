@@ -445,17 +445,17 @@ div#respond input[type="submit"]:focus{background-color:#77b900;color:#ffffff;}
 .voices-page .voice_list_header>div.voice_title,
 .voices-page #voice_list>li>.inner>div.voice_title{width:140px;margin-right:10px;font-weight:bold;}
 .voices-page .voice_list_header>div.talent_name,
-.voices-page #voice_list>li>.inner>div.talent_name{width:120px;margin-right:10px;}
+.voices-page #voice_list>li>.inner>div.talent_name{width:143px;margin-right:10px;}
 .voices-page .voice_list_header>div.tonality_list,
-.voices-page #voice_list>li>.inner>div.tonality_list{width:120px;margin-right:10px;}
+.voices-page #voice_list>li>.inner>div.tonality_list{width:142px;margin-right:10px;}
 .voices-page .voice_list_header>div.language_list,
-.voices-page #voice_list>li>.inner>div.language_list{width:100px;margin-right:10px;}
+.voices-page #voice_list>li>.inner>div.language_list{width:123px;margin-right:10px;}
 .voices-page .voice_list_header>div.accent_list,
-.voices-page #voice_list>li>.inner>div.accent_list{width:150px;margin-right:10px;}
+.voices-page #voice_list>li>.inner>div.accent_list{width:173px;margin-right:10px;}
 .voices-page .voice_list_header>div.age_list,
-.voices-page #voice_list>li>.inner>div.age_list{width:120px;margin-right:10px;}
+.voices-page #voice_list>li>.inner>div.age_list{width:143px;margin-right:10px;}
 .voices-page .voice_list_header>div.gender_list,
-.voices-page #voice_list>li>.inner>div.gender_list{width:110px;margin-right:10px;}
+.voices-page #voice_list>li>.inner>div.gender_list{width:134px;margin-right:10px;}
 .voices-page #voice_list>li>.inner>div.clear{float:none;}
 
 .voices-page .voice_list_header>div a{display:inline-block;font-weight:bold;cursor:default;}
@@ -701,23 +701,26 @@ section.montage-signature a img{border:0px;position:relative;top:5px;}
 li.voice_item {
 	padding-left: 0;
 	border-left:0;
-	 -webkit-transition: all 100s; /* For Safari 3.1 to 6.0 */
-    transition: all 100s;
-}
+	}
 .voice_list .voice_item.now-playing{
-	border-left: 5px solid green;
-	padding-left: 10px !important;
+	background-color:rgba(119, 185, 0, 0.5) !important;
 }
 .voice_list .selected{
-	border-left: 5px solid #77b900;
-	padding-left: 10px !important;	
-}
+	background-color:rgba(119, 185, 0, 1) !important;
+	}
 .voice_list .voice_item.played{
-	border-left: 5px solid red;
-	padding-left: 10px !important;
+	background-color:rgba(0, 0, 0, 0.2) !important;
+}
+.selected .inner  div  a,
+.selected .inner{
+	color: #fff !important;
+}
+.selected:hover .inner  div  a,
+.selected:hover .inner{
+	color: #000 !important;
 }
 .helper-color{
-	float: right;
+	float: left;
 }
 .label{
 	font-family: Tahoma;
@@ -734,13 +737,14 @@ vertical-align: baseline;
 border-radius: .25em;
 }
 .label-selected{
-	background-color:#77b900; 
+	background-color:rgba(119, 185, 0, 1) !important;
 }
 .label-played{
-	background-color: red;
+	background-color: rgba(0, 0, 0, 0.2) !important;
 }
 .label-now{
-	background-color: green;
+	background-color: rgba(119, 185, 0, 0.5) !important;
+	color: #000;
 }
 /*******Header*******/
 .social-menu-container{position:absolute;top:103px;right:0px;padding:0px;margin:0px;z-index:100;}
@@ -1032,11 +1036,12 @@ border-radius: 4px;
 .latest-news{
 	margin-bottom: 50px;
 }
-
 .home-intro{
 	margin-bottom:30px; 
 }
-
+.voices-page .voice_list .voice_item .inner:hover{
+	background-color: #eee;
+}
 
 
 /*********Media Quire*********/
