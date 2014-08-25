@@ -182,6 +182,7 @@ expires = "; expires=" + date.toGMTString();
                 </ul>
             </div>
 		<?php } ?>
+    <?php get_search_form(); ?>
     </div>
 </section>
 <section class="sitecontent <?php if(is_page(2)){ echo"homecontent";} ?> clear">
