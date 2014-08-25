@@ -328,7 +328,7 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
         });
 
     });
-  $(function () {
+ /*$(function () {
        
         $('.subfilter li a').addClass('show');
         
@@ -435,7 +435,7 @@ $.each(classes, function(i, el){
 //$("select").selectOrDie();
 
      
-    });
+    });*/
 
 </script>
 	<script language="javascript">	
