@@ -13,6 +13,14 @@
  */
 
 get_header(); ?>
+<?php while ( have_posts() ) : the_post(); ?>
+        <div class="wrapper relative clear home-intro">
+            <h1 class="page-title home-title">
+                <span class="title" title="<?php the_title(); ?>"><?php the_title(); ?></span>
+            </h1>
+            <?php the_content(); ?>
+        </div>
+    <?php endwhile; // end of the loop. ?>
     <script defer src="<?php echo get_template_directory_uri(); ?>/js/jquery.flexslider-min.js"></script>
     <script type="text/javascript">
         $(window).load(function(){
@@ -100,14 +108,6 @@ get_header(); ?>
         <?php endwhile; ?>
         </ul>
     </div>
-    <?php while ( have_posts() ) : the_post(); ?>
-        <div class="wrapper relative clear">
-            <h1 class="page-title normalcase">
-                <span class="title" title="<?php the_title(); ?>"><?php the_title(); ?></span>
-            </h1>
-            <?php the_content(); ?>
-        </div>
-    <?php endwhile; // end of the loop. ?>
 		<?php
              $news_home_block_title = get_field("news_home_block_title", 'options');
 		?>
@@ -115,35 +115,29 @@ get_header(); ?>
     	<h1 class="page-title all-news normalcase">
         	<a href="<?php echo get_category_link(14); ?>"><span class="title" title="<?php echo $news_home_block_title; ?>"><?php echo $news_home_block_title; ?></span></a>
         </h1>
-		<div class="home-news-list-container">
-                <?php $news_query = new WP_Query("cat=14&showposts=2");
-				if ($news_query->have_posts()){ ?>
-                        <ul class="clear"> 
-                            <?php while ($news_query->have_posts()) : $news_query->the_post(); ?>
-                            <li>
-                                <date><?php echo the_date();  ?></date>
-                                <label><a href="<?php echo get_permalink();  ?>"><?php the_title(); ?></a></label>
-                                <span>
-                                    <?php
-                                        $thecontent = $post->post_content; /* or you can use get_the_title() */
-                                        $postOutput = strip_tags(nl2br($thecontent),"");
-                                        $getlength = strlen($postOutput);
-                                        $thelength = 450;
-                                        echo substr($postOutput, 0, $thelength);
-                                        if ($getlength > $thelength) echo "...";
-                                    ?>
-                                </span>
-                            </li>
-                            <?php endwhile; ?>
-                        </ul>
-                <?php }else{
-				echo "No available news!";	
-				} ?>                
-			<a href="<?php echo get_category_link(14); ?>" class="view-all-news">more news...</a>
-             <div class="news-toggle">
-            <a href="#">Latest News</a>
+ <div class="home-news-list-container">
+            <ul class="home-news-list slides clear">
+                <?php $news_query = new WP_Query("cat=14&showposts=3"); 
+                while ($news_query->have_posts()) : $news_query->the_post();
+                ?>
+                <li>
+                    <date><?php echo the_date();  ?></date>
+                    <label><a href="<?php echo get_permalink();  ?>"><?php the_title(); ?></a></label>
+                    <span>
+                        <?php
+                            $thecontent = $post->post_content; /* or you can use get_the_title() */
+                            $postOutput = strip_tags(nl2br($thecontent),"");
+                            $getlength = strlen($postOutput);
+                            $thelength = 450;
+                            echo substr($postOutput, 0, $thelength);
+                            if ($getlength > $thelength) echo "...";
+                        ?>
+                    </span>
+                </li>
+                <?php endwhile; ?>
+            </ul>
+            <a href="<?php echo get_category_link(14); ?>" class="view-all-news">more news...</a>
         </div> 
-		</div> 
              
     </div>
 	<div class="clear"></div>

@@ -133,7 +133,6 @@ expires = "; expires=" + date.toGMTString();
 </head>
 
 <body>
-<input type="hidden" name="current_user_id" id="current_user_id" value="<?php echo get_current_user_id(); ?>" ></input>
 <div class="my-selection-container">
     <div class="inner">
         <a class="trigger">My Selection</a>
@@ -167,12 +166,6 @@ expires = "; expires=" + date.toGMTString();
             </a>
         </h1>
         <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container_class' => 'menu-container' ) ); ?>
-        <div class="header-login-form hidden-el">
-            <?php if ( is_active_sidebar( 'login_form_widget' ) ) : ?>
-                <?php dynamic_sidebar( 'login_form_widget' ); ?>
-            <?php endif; ?>
-
-        </div>
         	<?php
              $facebook = get_field("facebook", 'options');
              $twitter = get_field("twitter", 'options');
