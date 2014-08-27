@@ -177,7 +177,7 @@ get_header(); ?>
 				
 				 ?>
                     
-		<li class="voice_item <?php echo $post_tonalities ;?> <?php echo $post_languages ;?> <?php echo $post_accents ;?> <?php echo $post_age_brackets ;?> <?php echo $post_voice_genders ;?> <?php echo $post_talents ;?>">
+		<li class="voice_item <?php echo $post_tonalities ;?> <?php echo $post_languages ;?> <?php echo $post_accents ;?> <?php echo $post_age_brackets ;?> <?php echo $post_voice_genders ;?> ">
             <div class="inner">
                 <div class="selection_status">
                 <?php if($talents){
@@ -215,7 +215,7 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
                 <div class="talent_name filterable">
 					<?php if($talents){
                          foreach($talents as $talent){
-							 	echo '<a class="'. $post_talents .'" data-filter-value=".'. $post_talents .'">'.get_the_title($talent).'</a> <em>('. $talent->ID .'</em>)'; ?>
+							 	echo '<a class="'. $post_talents .'" >'.get_the_title($talent).'</a> <em>('. $talent->ID .'</em>)'; ?>
                     <?php } } ?>
                 </div>
                 <div class="tonality_list filterable">
@@ -266,13 +266,14 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
                 <div class="clear"></div>
             </div>
 		</li>
+   
                 <?php 
 			endwhile;
 		else :
 			echo wpautop( 'Voices will be available soon.' );
 		endif;
 ?>
-	
+	  
                 </ul>
     <div class="clear space25"></div>
     
@@ -321,7 +322,7 @@ rel="<?php echo get_current_user_id().'_/*'.$post->ID.'_/*'.get_the_title().'_/*
         });
 
     });
- /*$(function () {
+ $(function () {
        
         $('.subfilter li a').addClass('show');
         
@@ -342,9 +343,10 @@ var $container = $('#voice_list').isotope({
   
   $container.isotope( 'on', 'layoutComplete', function( isoInstance, laidOutItems ) {
     $('.subfilter li a').addClass('show');
+    //console.log('layoutComplete');
     //[data-filter-value='category'].[data-filter-value='brands'],[data-filter-value='clients'],[data-filter-value='agency']
     if($("a.all").hasClass('selected')){
-            $('.subfilter li a').attr('class','');
+         //   $('.subfilter li a').attr('class','');
             $('.subfilter li a').addClass('show');
         }
         
@@ -365,19 +367,17 @@ $.each(classes, function(i, el){
                
                     var ele=$(this).attr('data-filter-value').replace('.','');
                     
-                  if(ele!='.' || ele!=""){
-
+                  if(ele!='.' || ele!==""){
                     if ($.inArray(ele,uniqueNames)<=0){
-                         $(this).attr('class','');
+                      $(this).removeClass('show');
                         $(this).addClass('not-show');
+                        $('a.all').addClass('show');
+                       // $("[data-filter-value='category']").addClass('show');
 
                         
                     }
-             
                 }else{
                     uniqueNames='';
-                    console.log('all');
-                    //$('.subfilter li a').addClass('show');  
                 }
                 });
 
@@ -428,13 +428,12 @@ $.each(classes, function(i, el){
 //$("select").selectOrDie();
 
      
-    });*/
-
+    });
 </script>
 	<script language="javascript">	
 
 		<?php $voice_id = $_GET['v_id'];
-        echo 'idddd='.$_GET['page_id'];
+        
 			if($voice_id){ ?>
                 
 			$(window).load(function () {
