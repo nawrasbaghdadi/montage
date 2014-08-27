@@ -429,9 +429,9 @@ div#respond input[type="submit"]:focus{background-color:#77b900;color:#ffffff;}
 
 
 .voices-page #voice_list{padding:0px;margin:0px;list-style:none;font-size:11px;clear:both;list-style:none;}
-.voices-page #voice_list>li{padding:0px 0px 0px 0px;margin:0px;clear:both;line-height:16px;background-color:#ffffff;width:1000px;}
+.voices-page #voice_list>li{padding:0px 0px 0px 0px;margin:0px;clear:both;background-color:#ffffff;width:1000px;}
 .voices-page #voice_list>li:hover{background-color:#f7f7f7;}
-.voices-page #voice_list>li>.inner{width:1000px;padding:3px 0px 3px 0px;border-bottom:1px solid #f1f1f1;margin-bottom:1px;}
+.voices-page #voice_list>li>.inner{width:1000px;padding:3px 0px 3px 0px;margin-bottom:1px;}
 .voices-page .voice_list_header{display:block;font-size:12px;font-weight:bold;border-bottom: 1px solid #ddd;height:20px;}
 .voices-page .voice_list_header>div,
 .voices-page #voice_list>li>.inner>div{float:left;}
@@ -706,7 +706,7 @@ li.voice_item {
 	background-color:rgba(119, 185, 0, 0.5) !important;
 }
 .voice_list .selected{
-	background-color:rgba(119, 185, 0, 1) !important;
+	background-color:rgba(110, 170, 11, 1) !important;
 	}
 .voice_list .voice_item.played{
 	background-color:rgba(0, 0, 0, 0.2) !important;
@@ -737,7 +737,7 @@ vertical-align: baseline;
 border-radius: .25em;
 }
 .label-selected{
-	background-color:rgba(119, 185, 0, 1) !important;
+	background-color:rgba(110, 170, 11, 1) !important;
 }
 .label-played{
 	background-color: rgba(0, 0, 0, 0.2) !important;
