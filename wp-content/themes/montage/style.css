@@ -820,12 +820,34 @@ transition: opacity .6s .1s,transform .6s ease;
 	margin-top: 10px;
 }
 .address .pull-right{
-	text-align: center;
 	padding-top: 20px;
 }
 .address .left-txt{
-	text-align: center;
 	padding-top: 20px;
+}
+.address .right-txt{
+	margin-right: 28px;
+	width: 121px;
+}
+.services-all{
+width: 30%;
+background: #77b900;
+color: #fff;
+padding: 10px;
+text-align: center;
+margin-right: 10px;
+margin-bottom: 10px;
+line-height: 1.5em;
+}
+.services-all.third {
+    width: 32%;
+    margin-right: 0;
+}
+.services-all.extraline{
+	line-height: 2.9em;
+}
+.services-all:hover{
+	background:rgba(110, 170, 11, 1) !important;
 }
 .wrapper-form {
   display: block;
@@ -836,8 +858,8 @@ transition: opacity .6s .1s,transform .6s ease;
   margin-top: 20px;
   clear: both;
   padding-top: 20px;
-  margin-bottom: 100px
-   }
+  margin-bottom: 100px;
+}
 
 .form-header {
   text-align: center;
@@ -922,7 +944,7 @@ form {
         border-radius: 0 0 4px 4px;
         border: 0;
         padding: 20px 0 22px;
-        background-color: #3ac56e;
+        background-color: #77b900;
         color: white;
         font-weight: 500;
         -webkit-transition: all 0.4s;
@@ -1029,8 +1051,10 @@ border-radius: 4px;
 .voices-page .voice_list .voice_item .inner:hover{
 	background-color: #eee;
 }
+.massage-text .input-group-addon i{
+	padding-top: 0;
 
-
+}
 /*********Media Quire*********/
 @media (max-width : 1400px) {
 .sod_select{
