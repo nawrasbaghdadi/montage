@@ -760,9 +760,10 @@ border-radius: .25em;
 .social-menu-container>ul>li>a.linkedin{background-position:-61px 0px;}
 .social-menu-container>ul>li>a.linkedin:hover{background-position:-61px -17px;}
 
+.siteheader .menu-container>ul>li{
+	padding-right: 10px;
+}
 .siteheader .menu-container>ul>li a{
-width: 95px;
-height: 40px;
 line-height: 53px;
 padding:0px;
 color: #fff;
